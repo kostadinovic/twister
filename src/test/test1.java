@@ -1,4 +1,4 @@
-	package test;
+package test;
 
 import org.json.JSONObject;
 
@@ -9,10 +9,10 @@ public class test1 {
 	public static void main(String[] args) {
 		//Création user
 		
-		//JSONObject js = services.createUser.createUser("imane","ben", "imane@hotmail.fr", "imane", "1235456789","22");
+		//JSONObject js = services.CreateUser.createUser("imane","ben", "imane@hotmail.fr", "imane", "1235456789","22");
 		//System.out.println(js);
 		
-		//JSONObject js2 = services.createUser.createUser("nem","kos", "kos@hotmail.fr", "nem", "123456789","22");
+		//JSONObject js2 = services.CreateUser.createUser("nem","kos", "kos@hotmail.fr", "nem", "123456789","22");
 		//System.out.println(js2);
 		
 		//Login des users
@@ -24,8 +24,8 @@ public class test1 {
 		//System.out.println(js3);
 		
 		//LogOut des users
-		JSONObject js4 = services.Logout.logout(UserTools.getKey("nem"));
-		System.out.println(js4);
+		//JSONObject js4 = services.Logout.logout(UserTools.getKey("nem"));
+		//System.out.println(js4);
 		
 		//addFriend
 		
@@ -39,7 +39,7 @@ public class test1 {
 		//System.out.println(UserTools.getKey("nem")+"id="+tools.BDTools.getUserId("imane"));
 		
 		
-		
+		//CreateUser?nom=kosta&prenom=nem&mail=lili&login=lala&password=123456789&age=22
 		
 		
 	}

@@ -15,14 +15,20 @@ public class Login extends HttpServlet{
 	public Login() {
 	}
 	
-	 protected void doGet(HttpServletRequest request,
-			 HttpServletResponse response) throws ServletException, IOException {
-			 	response.setContentType( "text/plain" );
-			 	String login = request.getParameter("login");
-				String password = request.getParameter("password");
-				PrintWriter out = response.getWriter ();
-				JSONObject js = services.Login.login(login, password);
-				out.println(js);
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) 
+	{
+		String login = request.getParameter("login");
+		String password = request.getParameter("password");
+		response.setContentType("application/json");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		out.print(services.Login.login(login, password));
+		out.flush();
+		
 	}
 }
 

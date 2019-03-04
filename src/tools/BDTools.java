@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import bd.DataBase;
@@ -14,51 +15,48 @@ public class BDTools {
 	
 	
 	public static JSONObject insertUserBD(String nom, String prenom,String mail, String login,String password, String age) {
-		Connection co = null;
-		Statement st = null;
+		JSONObject obj = new JSONObject();
 		try {
-			co= DataBase.getMySQLConnection();
-			st = co.createStatement();
-			String query = "INSERT INTO users VALUES(null,'"+nom+"','" +prenom+ "','"+ mail+"','"+login+"','"+password+"','"+age+"')";
-			st.executeUpdate(query);
-		} catch (SQLException s) {
-			s.printStackTrace();
-			return ServiceTools.serviceRefused("SQLException:", 1000);
-		} finally {
+			Connection c = DataBase.getMySQLConnection();
+			String q = "Insert into users values(null, '" + nom + "','" + prenom + "', '" + mail + "', '" + login + "','" 
+			+ password + "','" + age + "');";
+			Statement s = c.createStatement();
+			int rs = s.executeUpdate(q);
+			s.close();
+			c.close();
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
 			try {
-				st.close();
-				co.close();
-			} catch (SQLException s) {}
+				obj.put("error", e.getMessage());
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+			return obj;
 		}
-		return new JSONObject();
 	}
 
 
 	public static boolean checkUserExist(String login){
-		Connection co = null;
-		Statement st = null;
-		ResultSet res = null;
-		
+		boolean userExists = false;
 		try {
-			co = DataBase.getMySQLConnection();
-			st = co.createStatement();
-			String query = "SELECT login from users where login = '"+login+"'";
-			res = st.executeQuery(query);
-			
-			if (res.next()) {
-				return true;
+			Connection c = DataBase.getMySQLConnection();
+			Statement s = c.createStatement();
+			String q = "SELECT * FROM users WHERE login='" + login + "';";
+			ResultSet rs = s.executeQuery(q);
+			userExists = false;
+			if (rs.next()) {
+				userExists = true;
 			}
-			
-		} catch (SQLException s) {
-			s.printStackTrace();
-		} finally {
-			try {
-				res.close();
-				st.close();
-				co.close();
-			} catch (SQLException ignore) {}
+			rs.close();
+			c.close();
+			s.close();
+
+		} catch (SQLException e) {
+			System.out.println("Exception checkUserExist");
+
 		}
-		return false;
+		return userExists;
 	}
 	
 	public static boolean checkUserPassword(String login,String password) throws SQLException {

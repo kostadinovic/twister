@@ -15,14 +15,19 @@ public class createUser extends HttpServlet {
 		
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
+		String mail = request.getParameter("mail");
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
-		String age = request.getParameter("age");
-		String mail = request.getParameter("mail");
-		
-		response.setContentType("json");
-		PrintWriter out= response.getWriter();
+		String age = request.getParameter("age");		
+		response.setContentType("application/json");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 		out.println(services.CreateUser.createUser(nom,prenom,mail,login,password,age));
+		out.flush();
 	}
 	
 

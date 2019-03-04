@@ -10,14 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
 public class AddFriend extends HttpServlet{
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	public AddFriend() {}
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) 
+	{
+		// nom prenom login password
+		String myLogin = request.getParameter("My_login");
+		String hisLogin = request.getParameter("His_login");
+		String key = request.getParameter("key");
+		response.setContentType("application/json");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		out.print(services.AddFriend.addFriend(myLogin, key, hisLogin));
+		out.flush();
 		
-		    response.setContentType( "text/plain" );
-		    String key = request.getParameter("key");
-		    String id_friend = request.getParameter("id_friend");
-		    PrintWriter out = response.getWriter ();
-		    out.println(services.AddFriend.addFriend(key,Integer.parseInt(id_friend)));
-		    
 	}
 }
