@@ -68,7 +68,7 @@ public class Friend {
 		} else if (!tools.UserTools.keyLogin(myLogin, key)) {
 			obj = tools.ServiceTools.serviceRefused("Pas le bon login/mdp",1000);
 		}
-		else if(!tools.FriendTools.dejaAmis(myLogin, hisLogin))
+		else if(!tools.FriendTools.alreadyFriend(myLogin, hisLogin))
 		{
 			obj = tools.ServiceTools.serviceRefused("Déja amis",100);
 		}

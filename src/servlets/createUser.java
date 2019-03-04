@@ -6,6 +6,9 @@ import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
+
 import javax.servlet.http.HttpServletRequest;
 
 @SuppressWarnings("serial")
@@ -25,10 +28,10 @@ public class createUser extends HttpServlet {
 			out = response.getWriter();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
-		out.println(services.CreateUser.createUser(nom,prenom,mail,login,password,age));
+		}
+		JSONObject js = new JSONObject();
+		js= services.User.createUser(nom, prenom, mail, login, password, age);
+		out.println(js);
 		out.flush();
 	}
-	
-
 }
