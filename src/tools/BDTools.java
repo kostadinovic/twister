@@ -1,6 +1,5 @@
 package tools;
 
-import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +20,7 @@ public class BDTools {
 			String q = "Insert into users values(null, '" + nom + "','" + prenom + "', '" + mail + "', '" + login + "','" 
 			+ password + "','" + age + "');";
 			Statement s = c.createStatement();
-			int rs = s.executeUpdate(q);
+			s.executeUpdate(q);
 			s.close();
 			c.close();
 			return null;
@@ -52,7 +51,8 @@ public class BDTools {
 		co.close();
 		return false;
 	}
-
+	
+	//inutile pour l'instant mais peur servir plus tard
 	public static int getUserId(String login) {
 		Connection co = null;
 		Statement st = null;

@@ -39,9 +39,17 @@ public class ServiceTools {
 		return json;
 	}
 	
-	public static boolean checkdate(String login, String key) {
-		// TODO Auto-generated method stub
-		
+	public static String genKey() {
+		String key="";
+		String lettre ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		for(int i=0;i<32;i++) {
+			int r = new Random().nextInt(lettre.length());
+			key+=lettre.charAt((r));
+		}
+		return key;
+	}
+	
+	public static boolean checkdate(String login, String key) {		
 		boolean check = false;
 		try {
 			Connection c = DataBase.getMySQLConnection();
@@ -69,17 +77,6 @@ public class ServiceTools {
 		}
 		
 		return check;
-	}
-	
-	public static String genKey() {
-		String key="";
-		String lettre ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		for(int i=0;i<32;i++) {
-			int r = new Random().nextInt(lettre.length());
-			key+=lettre.charAt((r));
-		}
-		return key;
-		
 	}
 	
 }

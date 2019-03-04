@@ -4,87 +4,57 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Friend {
-	public static JSONObject addFriend(String myLogin, String key, String hisLogin) {
+	public static JSONObject addFriend(String monLogin, String key, String friendLogin) {
 
-		JSONObject obj = null;
-		if (myLogin == null || hisLogin == null || key == null) {
-			obj = tools.ServiceTools.serviceRefused("Parametre null",-1);
+		JSONObject js = null;
+		if (monLogin == null || friendLogin == null || key == null) {
+			js = tools.ServiceTools.serviceRefused("Parametre null",-1);
 
-		} else if (!tools.UserTools.checkUserExist(myLogin) || !tools.UserTools.checkUserExist(hisLogin)) {
-			obj = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",1);
-		} else if (!tools.UserTools.keyLogin(myLogin, key)) {
-			obj = tools.ServiceTools.serviceRefused("Problème de session",-1);
+		} else if (!tools.UserTools.checkUserExist(monLogin) || !tools.UserTools.checkUserExist(friendLogin)) {
+			js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",1);
+		} else if (!tools.UserTools.keyLogin(monLogin, key)) {
+			js = tools.ServiceTools.serviceRefused("Problème de session",-1);
 		} else {
-			obj = new JSONObject();
-			try {
-				if (tools.FriendTools.addfollowing(myLogin, hisLogin)) {
-
-					obj.put("ajout de l'ami", "ok ");
-
-				} else {
-					obj.put("ajout de l'ami", "failed");
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+			js = tools.FriendTools.addFriend(monLogin, friendLogin);
 		}
-
-		return obj;
-
+		return js;
 	}
 
 	public static JSONObject listFriends(String login) {
-
-		JSONObject obj = null;
+		JSONObject js = null;
 		if (login == null) {
-			obj = tools.ServiceTools.serviceRefused("Paramètre null",-1);
-
+			js = tools.ServiceTools.serviceRefused("Paramètre null",-1);
 		} else if (!tools.UserTools.checkUserExist(login)) {
-			obj = tools.ServiceTools.serviceRefused("L'utilisateurs n'existe pas",100);
+			js = tools.ServiceTools.serviceRefused("L'utilisateurs n'existe pas",100);
 		} else {
-
-			try {
-				obj = tools.FriendTools.listFriends(login);
-
-				obj.put("amis ", "ok ");
-
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+			js = tools.FriendTools.listFriends(login);
 		}
-
-		return obj;
-
+		return js;
 	}
 
-	public static JSONObject unFriend(String myLogin, String key, String hisLogin) {
-
-		JSONObject obj = null;
-		if (myLogin == null || hisLogin == null) {
-			obj = tools.ServiceTools.serviceRefused("Paramètre null",-1);
-
-		} else if (!tools.UserTools.checkUserExist(myLogin)) {
-			obj = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
-		} else if (!tools.UserTools.keyLogin(myLogin, key)) {
-			obj = tools.ServiceTools.serviceRefused("Pas le bon login/mdp",1000);
+	public static JSONObject removeFriend(String monLogin, String key, String friendLogin) {
+		JSONObject js = null;
+		if (monLogin == null || friendLogin == null) {
+			js = tools.ServiceTools.serviceRefused("Paramètre null",-1);
+		} else if (!tools.UserTools.checkUserExist(monLogin)) {
+			js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
+		} else if (!tools.UserTools.keyLogin(monLogin, key)) {
+			js = tools.ServiceTools.serviceRefused("Pas le bon login/mdp",1000);
 		}
-		else if(!tools.FriendTools.alreadyFriend(myLogin, hisLogin))
+		else if(!tools.FriendTools.alreadyFriend(monLogin, friendLogin))
 		{
-			obj = tools.ServiceTools.serviceRefused("Déja amis",100);
+			js = tools.ServiceTools.serviceRefused("Déja amis",100);
 		}
 		else {
-			tools.FriendTools.unfollow(myLogin,hisLogin);
+			tools.FriendTools.deleteFriend(monLogin,friendLogin);
 			try {
-				obj = new JSONObject();
-				obj.put("suppression de l'ami", "ok ");
+				js = new JSONObject();
+				js.put("suppression de l'ami", "ok ");
 
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
-
-		return obj;
-
+		return js;
 	}
-
 }

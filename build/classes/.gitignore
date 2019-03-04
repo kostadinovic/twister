@@ -1,3 +1,6 @@
-/servlets/
+/.DS_Store
+/bd/
 /services/
+/servlets/
+/test/
 /tools/

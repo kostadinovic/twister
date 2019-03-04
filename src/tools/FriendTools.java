@@ -15,54 +15,52 @@ import bd.DataBase;
 
 public class FriendTools {
 	
-	public static JSONObject  addFriend(String monLogin, String friendLogin) {
+	public static JSONObject addFriend(String monLogin, String friendLogin) {
 		Connection co = null;
 		Statement st = null;
-		
 		try {
 			co = DataBase.getMySQLConnection();
 			st = co.createStatement();
-			int id_user = UserTools.getIdUserByKey(key);
-			String query = "INSERT INTO Friends VALUES('" + id_user + "','" + id_friend + "','" + new Timestamp(System.currentTimeMillis()) + "')";
+			String query = "INSERT INTO Friends VALUES('" + monLogin + "','" + friendLogin + "','" + new Timestamp(System.currentTimeMillis()) + "')";
 			st.executeUpdate(query);
-			return new JSONObject();
+			return tools.ServiceTools.serviceAccepted();
 		} catch (SQLException s) {
 			s.printStackTrace();
 		} finally {
 			try {
 				st.close();
 				co.close();
-			} catch (SQLException ignore) {}
+			} catch (SQLException ignore) {
+				return ServiceTools.serviceRefused("SQLException", 1000);
+			}
 		}
-		return ServiceTools.serviceRefused("SQLException", 1000);
+		return ServiceTools.serviceRefused("Erreur lors de l'ajout de l'ami "+friendLogin, 1000);
 	}
 	
-	public static JSONObject deleteFriend(String key, int id_friend) {
+	public static JSONObject deleteFriend(String myLogin, String friendLogin) {
 		Connection co = null; 
 		Statement st = null;
-		
 		try {
 			co = DataBase.getMySQLConnection();
 			st = co.createStatement();
-			int id_user = UserTools.getIdUserByKey(key);
-			String query = "DELETE FROM Friends WHERE from_id =" + id_user
-					+ " and to_id = " + id_friend;
+			String query = "DELETE FROM Friends WHERE from_login =" + myLogin
+					+ " and to_login = " + friendLogin;
 			st.executeUpdate(query);
-			
-			return new JSONObject();
+			return ServiceTools.serviceAccepted();
 		} catch (SQLException s) {
 			s.printStackTrace();
 		} finally {
 			try {
 				st.close();
 				co.close();
-			} catch (SQLException ignore) {}
+			} catch (SQLException ignore) {
+				return ServiceTools.serviceRefused("SQLException", 1000);
+			}
 		}
-		return ServiceTools.serviceRefused("SQLException", 1000);
+		return ServiceTools.serviceRefused("Erreur lors de la suppresion de l'ami "+friendLogin, 1000);
 	}
 	
 	public static boolean alreadyFriend(String monLogin, String loginFriend) {
-		// TODO Auto-generated method stub
 		boolean check = false;
 		try {
 			Connection c = DataBase.getMySQLConnection();
@@ -86,7 +84,6 @@ public class FriendTools {
 	}
 
 	public static JSONObject listFriends(String login) {
-		// TODO Auto-generated method stub
 		JSONObject obj = new JSONObject();
 		List<String> liste = new ArrayList<String>();
 		try {
@@ -109,5 +106,4 @@ public class FriendTools {
 		}
 		return obj;
 	}
-
 }

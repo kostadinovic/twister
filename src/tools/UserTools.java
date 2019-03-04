@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.util.Random;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +21,7 @@ public class UserTools {
 			String q = "Insert into users values(null, '" + nom + "','" + prenom + "', '" + mail + "', '" + login + "','" 
 			+ password + "','" + age + "');";
 			Statement s = c.createStatement();
-			int rs = s.executeUpdate(q);
+			s.executeUpdate(q);
 			s.close();
 			c.close();
 			return null;
@@ -73,8 +72,24 @@ public class UserTools {
 
 
 	public static boolean checkMailExist(String mail) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean mailExists = false;
+		try {
+			Connection c = DataBase.getMySQLConnection();
+			Statement s = c.createStatement();
+			String q = "SELECT * FROM users WHERE mail='" + mail + "';";
+			ResultSet rs = s.executeQuery(q);
+			mailExists = false;
+			if (rs.next()) {
+				mailExists = true;
+			}
+			rs.close();
+			c.close();
+			s.close();
+		} catch (SQLException e) {
+			System.out.println("Exception checkUserExist");
+
+		}
+		return mailExists;
 	}
 
 	
@@ -107,7 +122,6 @@ public class UserTools {
 
 
 	public static int getIdUserByKey(String key) {
-		// TODO Auto-generated method stub
 		Connection co = null;
 		Statement st = null;
 		ResultSet res = null;
@@ -182,7 +196,6 @@ public class UserTools {
 
 
 	public static boolean addConnection(String id_user, boolean root) {
-		// TODO Auto-generated method stub
 		Connection con = null;
 		Statement stat = null;
 		String key = tools.ServiceTools.genKey();

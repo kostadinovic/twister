@@ -17,8 +17,8 @@ public class MessageTools {
 		MongoDatabase mb = MongoTools.getMyMongoConnexion();
 		MongoCollection<Document> mc = mb.getCollection("Message");
 		Document d = new Document();
-		d.append("id_from", id);
-		d.append("login_from", login);
+		d.append("from_id", id);
+		d.append("from_login", login);
 		d.append("message", message);
 		d.append("date", date);
 		mc.insertOne(d);
@@ -31,7 +31,6 @@ public class MessageTools {
 		Document d = new Document();
 		d.append("_id", new ObjectId(id_message));
 		mc.deleteOne(d);
-
 	}
 
 	public static JSONObject listMessages(int id) {
@@ -40,11 +39,11 @@ public class MessageTools {
 			MongoDatabase bd = MongoTools.getMyMongoConnexion();
 			MongoCollection<Document> mc = bd.getCollection("Messages");
 			Document d = new Document();
-			d.append("author_id", id);
+			d.append("from_id", id);
 			MongoCursor<Document> cursor = mc.find(d).iterator();
 			while (cursor.hasNext()) {
 				Document rdy = cursor.next();
-				js.append(rdy.getString("author_name"), rdy.getString("message"));
+				js.append(rdy.getString("from_name"), rdy.getString("message"));
 				System.out.println(rdy);
 			}
 		} catch (JSONException e) {

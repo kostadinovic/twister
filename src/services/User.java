@@ -1,11 +1,8 @@
 package services;
 
-import java.sql.SQLException;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import tools.BDTools;
 import tools.ServiceTools;
 import tools.UserTools;
 
@@ -101,7 +98,6 @@ public class User {
 				obj.put("deconnection", "ok ");
 				
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -112,7 +108,6 @@ public class User {
 				obj.put("deconnection", "failed ");
 				
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
