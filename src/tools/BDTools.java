@@ -37,27 +37,6 @@ public class BDTools {
 	}
 
 
-	public static boolean checkUserExist(String login){
-		boolean userExists = false;
-		try {
-			Connection c = DataBase.getMySQLConnection();
-			Statement s = c.createStatement();
-			String q = "SELECT * FROM users WHERE login='" + login + "';";
-			ResultSet rs = s.executeQuery(q);
-			userExists = false;
-			if (rs.next()) {
-				userExists = true;
-			}
-			rs.close();
-			c.close();
-			s.close();
-
-		} catch (SQLException e) {
-			System.out.println("Exception checkUserExist");
-
-		}
-		return userExists;
-	}
 	
 	public static boolean checkUserPassword(String login,String password) throws SQLException {
 		Connection co = DataBase.getMySQLConnection();
@@ -98,91 +77,6 @@ public class BDTools {
 		}
 		return id_user;
 	}
-
-	public static String insertConnexion(int id_user, boolean root) {
-		Connection con = null;
-		Statement stat = null;
-		String key = tools.UserTools.genKey();
-		
-		try {
-			con = DataBase.getMySQLConnection();
-			stat = con.createStatement();
-			String query = "INSERT INTO Connection VALUES('" + key + "','" +id_user+ "','" + new Timestamp(System.currentTimeMillis())
-					+ "'," + root +")";
-			stat.executeUpdate(query);
-			
-		} catch (SQLException s) {
-			s.printStackTrace();
-		} finally {
-			try {
-				stat.close();
-				con.close();
-			} catch (SQLException ignore) {}
-		}
-		return key;
-	}
-
-	public static boolean checkLoginConnexion(String login, String key) {
-		boolean check = false;
-		try {
-			Connection c = DataBase.getMySQLConnection();
-			Statement s = c.createStatement();
-			String q = "SELECT * FROM COnnection WHERE login='" + login + "' and key='"+ key +"' ;";
-			ResultSet rs = s.executeQuery(q);
-			
-			if (rs.next()) {
-				check = true;
-			}
-			s.close();
-			c.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		}
-		if(check)
-		{
-			//check = BDTools.checkDate(login, key);
-		}
-		
-		return check;
-	} 
-	
-	/*
-	
-	public static boolean checkDate(String login, String key) {
-		boolean check = false;
-		try {
-			Connection c = DataBase.getMySQLConnection();
-			Statement s = c.createStatement();
-			String q = "SELECT * FROM Session WHERE login='" + login + "' and clef='"+ key +"'and date_exp+3600> now() ;";
-			ResultSet rs = s.executeQuery(q);
-			
-			if (rs.next()) {
-				check = true;
-			}
-			s.close();
-			c.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		}
-		if(check)
-		{
-			ServiceTools.updateExpiration(login);
-		}
-		else
-		{
-			User.logout(login, key);
-		}
-		
-		return check;
-	}
-	
-	*/
-	
-
-	
-	
 }
+
+

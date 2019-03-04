@@ -24,7 +24,7 @@ public class AddFriend extends HttpServlet{
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		out.print(services.AddFriend.addFriend(myLogin, key, hisLogin));
+		out.print(services.Friend.addFriend(myLogin, key, hisLogin));
 		out.flush();
 		
 	}

@@ -5,11 +5,59 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Random;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import bd.DataBase;
 
 public class UserTools {
+	
+	public static JSONObject insertUserBD(String nom, String prenom,String mail, String login,String password, String age) {
+		JSONObject obj = new JSONObject();
+		try {
+			Connection c = DataBase.getMySQLConnection();
+			String q = "Insert into users values(null, '" + nom + "','" + prenom + "', '" + mail + "', '" + login + "','" 
+			+ password + "','" + age + "');";
+			Statement s = c.createStatement();
+			int rs = s.executeUpdate(q);
+			s.close();
+			c.close();
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				obj.put("error", e.getMessage());
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+			return obj;
+		}
+	}
+	
+	public static boolean checkUserExist(String login){
+		boolean userExists = false;
+		try {
+			Connection c = DataBase.getMySQLConnection();
+			Statement s = c.createStatement();
+			String q = "SELECT * FROM users WHERE login='" + login + "';";
+			ResultSet rs = s.executeQuery(q);
+			userExists = false;
+			if (rs.next()) {
+				userExists = true;
+			}
+			rs.close();
+			c.close();
+			s.close();
+
+		} catch (SQLException e) {
+			System.out.println("Exception checkUserExist");
+
+		}
+		return userExists;
+	}
 	
 	public static boolean checkSecurityPass(String password) {
 		if(password.length() > 5) {
@@ -18,51 +66,17 @@ public class UserTools {
 		return false;
 	}
 	
-	
-	public static void disconnectUser(String key) {
-		// DECO USER DANS LA BD
-	}
-
 	public static boolean checkMail(String mail) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
-	public static void removeConnection(String key) {
-		Connection co = null;
-		Statement st = null;
-		try {
-			co = DataBase.getMySQLConnection();
-			st = co.createStatement();
-			String query = "DELETE from Connection where Connection.key_co ='"+key+"'";
-			st.executeUpdate(query);
-			
-		} catch (SQLException s) {
-			s.printStackTrace();
-		} finally {
-			try {
-				st.close();
-				co.close();
-			} catch (SQLException ignore) {}
-		}
-}
 
 	public static boolean checkMailExist(String mail) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	
-	public static String genKey() {
-		String key="";
-		String lettre ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		for(int i=0;i<32;i++) {
-			int r = new Random().nextInt(lettre.length());
-			key+=lettre.charAt((r));
-		}
-		return key;
-		
-	}
 	
 	public static String getKey(String login) {
 		Connection co = null;
@@ -118,4 +132,98 @@ public class UserTools {
 		return id_user;
 	}
 
+	public static boolean keyLogin(String userLogin, String key) {
+		// TODO Auto-generated method stub
+		boolean check = false;
+		try {
+			Connection c = DataBase.getMySQLConnection();
+			Statement s = c.createStatement();
+			String q = "SELECT * FROM Connection WHERE login='" + userLogin + "' and key='"+ key +"' ;";
+			ResultSet rs = s.executeQuery(q);
+			if (rs.next()) {
+				check = true;
+			}
+			s.close();
+			c.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(check)
+		{
+			check = ServiceTools.checkdate(userLogin, key);
+		}
+		
+		return check;
+	}
+
+
+	public static boolean verifyPass(String login, String password) {
+		// TODO Auto-generated method stub
+		boolean goodPass = false;
+		try {
+			Connection c = DataBase.getMySQLConnection();
+			Statement s = c.createStatement();
+			String q = "SELECT login, password from users where login = '" + login + "'"
+					+ " and password = '" + password+ "'";
+			ResultSet rs = s.executeQuery(q);
+			goodPass = false;
+			if (rs.next()) {
+				goodPass = true;
+			}
+			rs.close();
+			s.close();
+			c.close();
+
+		} catch (SQLException e) {
+
+		}
+		return goodPass;
+	}
+
+
+	public static boolean addConnection(String id_user, boolean root) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		Statement stat = null;
+		String key = tools.ServiceTools.genKey();
+		
+		try {
+			con = DataBase.getMySQLConnection();
+			stat = con.createStatement();
+			String query = "INSERT INTO Connection VALUES('" + key + "','" +id_user+ "','" + new Timestamp(System.currentTimeMillis())
+					+ "'," + root +")";
+			stat.executeUpdate(query);
+			
+		} catch (SQLException s) {
+			s.printStackTrace();
+		} finally {
+			try {
+				stat.close();
+				con.close();
+			} catch (SQLException ignore) {}
+		}
+		return true;
+		}
+	
+
+	public static boolean removeConnection(String key) {
+		Connection co = null;
+		Statement st = null;
+		try {
+			co = DataBase.getMySQLConnection();
+			st = co.createStatement();
+			String query = "DELETE from Connection where Connection.key_co ='"+key+"'";
+			st.executeUpdate(query);
+			
+		} catch (SQLException s) {
+			s.printStackTrace();
+			return false;
+		} finally {
+			try {
+				st.close();
+				co.close();
+			} catch (SQLException ignore) {}
+		}
+		return true;
+	}
 }
