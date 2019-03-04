@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,12 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 public class AddFriend extends HttpServlet{
 	public AddFriend() {}
-	protected void doGet(HttpServletRequest request,HttpServletResponse response) 
-	{
-		// nom prenom login password
-		String myLogin = request.getParameter("My_login");
-		String hisLogin = request.getParameter("His_login");
-		String key = request.getParameter("key");
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) {
+		String monLogin = request.getParameter("monlogin");
+		String friendLogin = request.getParameter("friendlogin");
+		String key = request.getParameter("key"); //verifier clé user droit + expiration
 		response.setContentType("application/json");
 		PrintWriter out = null;
 		try {
@@ -24,8 +21,7 @@ public class AddFriend extends HttpServlet{
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		out.print(services.Friend.addFriend(myLogin, key, hisLogin));
+		out.print(services.Friend.addFriend(monLogin, key, friendLogin));
 		out.flush();
-		
 	}
 }

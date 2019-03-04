@@ -12,10 +12,8 @@ import org.json.JSONObject;
 import javax.servlet.http.HttpServletRequest;
 
 @SuppressWarnings("serial")
-public class createUser extends HttpServlet {
-	public void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
+public class CreateUser extends HttpServlet {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String mail = request.getParameter("mail");
@@ -30,7 +28,7 @@ public class createUser extends HttpServlet {
 			e.printStackTrace();
 		}
 		JSONObject js = new JSONObject();
-		js= services.User.createUser(nom, prenom, mail, login, password, age);
+		js=services.User.createUser(nom, prenom, mail, login, password, age);
 		out.println(js);
 		out.flush();
 	}

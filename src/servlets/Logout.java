@@ -15,12 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 @SuppressWarnings("serial")
 public class Logout extends HttpServlet {
 	
-	public void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		    String login = request.getParameter("login");
 			String key = request.getParameter("key");
-			response.setContentType("json");
+			response.setContentType("application/json");
 			PrintWriter out = response.getWriter();
 			JSONObject js = services.User.logout(login,key);
 			out.println(js);

@@ -2,21 +2,19 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.JSONObject;
 
 @SuppressWarnings("serial")
-public class Login extends HttpServlet{
+public class ListFriend extends HttpServlet{
 	
-	public Login() {
-	}
+	public ListFriend() {}
 	
 	protected void doGet(HttpServletRequest request,HttpServletResponse response){
 		String login = request.getParameter("login");
-		String password = request.getParameter("password");
+		String key = request.getParameter("key");
 		response.setContentType("application/json");
 		PrintWriter out = null;
 		try {
@@ -24,8 +22,7 @@ public class Login extends HttpServlet{
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		out.print(services.User.login(login, password,false));
+		out.print(services.Friend.listFriends(login));
 		out.flush();
 	}
 }
-
