@@ -22,7 +22,6 @@ public class BDTools {
 			Statement s = c.createStatement();
 			s.executeUpdate(q);
 			s.close();
-			
 			c.close();
 			return null;
 		} catch (Exception e) {
