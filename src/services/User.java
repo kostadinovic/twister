@@ -92,7 +92,7 @@ public class User {
 		{
 			obj = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
 		}
-		else if (tools.UserTools.removeConnection(key)) {
+		else if (tools.UserTools.removeConnection(login)) {
 			try {
 				obj = new JSONObject();
 				obj.put("deconnection", "ok ");

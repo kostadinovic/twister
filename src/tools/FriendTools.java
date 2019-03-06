@@ -37,14 +37,14 @@ public class FriendTools {
 		return ServiceTools.serviceRefused("Erreur lors de l'ajout de l'ami "+friendLogin, 1000);
 	}
 	
-	public static JSONObject deleteFriend(String myLogin, String friendLogin) {
+	public static JSONObject deleteFriend(String monLogin, String friendLogin) {
 		Connection co = null; 
 		Statement st = null;
 		try {
 			co = DataBase.getMySQLConnection();
 			st = co.createStatement();
-			String query = "DELETE FROM Friends WHERE from_login =" + myLogin
-					+ " and to_login = " + friendLogin;
+			String query = "DELETE FROM Friends WHERE monLogin =" + monLogin
+					+ " and friendLogin = " + friendLogin;
 			st.executeUpdate(query);
 			return ServiceTools.serviceAccepted();
 		} catch (SQLException s) {
@@ -65,7 +65,7 @@ public class FriendTools {
 		try {
 			Connection c = DataBase.getMySQLConnection();
 			Statement s = c.createStatement();
-			String q = "SELECT * FROM Friends WHERE  from_login='" + monLogin + "' and to_login='" + loginFriend + "';";
+			String q = "SELECT * FROM Friends WHERE  monLogin='" + monLogin + "' and friendLogin='" + loginFriend + "';";
 			ResultSet rs = s.executeQuery(q);
 			
 			if (rs.next()) {

@@ -69,7 +69,7 @@ public class ServiceTools {
 		}
 		if(check)
 		{
-			//ServiceTools.updateExpiration(login);
+			ServiceTools.updateExpiration(login);
 		}
 		else
 		{
@@ -77,6 +77,19 @@ public class ServiceTools {
 		}
 		
 		return check;
+	}
+	
+	public static void updateExpiration(String login) {
+		try{
+			Connection c = DataBase.getMySQLConnection();
+			String q = "update Connection set date_exp=now() where login='"+login+"'";
+			Statement s = c.createStatement();
+			int rs = s.executeUpdate(q);
+			s.close();
+			c.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

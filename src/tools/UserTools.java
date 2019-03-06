@@ -146,13 +146,12 @@ public class UserTools {
 		return id_user;
 	}
 
-	public static boolean keyLogin(String userLogin, String key) {
-		// TODO Auto-generated method stub
+	public static boolean keyLogin(String monLogin, String key) {
 		boolean check = false;
 		try {
 			Connection c = DataBase.getMySQLConnection();
 			Statement s = c.createStatement();
-			String q = "SELECT * FROM Connection WHERE login='" + userLogin + "' and key='"+ key +"' ;";
+			String q = "SELECT * FROM Connection WHERE login='" + monLogin + "' and key='"+ key +"' ;";
 			ResultSet rs = s.executeQuery(q);
 			if (rs.next()) {
 				check = true;
@@ -164,7 +163,7 @@ public class UserTools {
 		}
 		if(check)
 		{
-			check = ServiceTools.checkdate(userLogin, key);
+			check = ServiceTools.checkdate(monLogin, key);
 		}
 		
 		return check;
@@ -219,13 +218,13 @@ public class UserTools {
 		}
 	
 
-	public static boolean removeConnection(String key) {
+	public static boolean removeConnection(String login) {
 		Connection co = null;
 		Statement st = null;
 		try {
 			co = DataBase.getMySQLConnection();
 			st = co.createStatement();
-			String query = "DELETE from Connection where Connection.key_co ='"+key+"'";
+			String query = "DELETE from Connection where login ='"+login+"'";
 			st.executeUpdate(query);
 			
 		} catch (SQLException s) {

@@ -12,8 +12,8 @@ public class Friend {
 
 		} else if (!tools.UserTools.checkUserExist(monLogin) || !tools.UserTools.checkUserExist(friendLogin)) {
 			js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",1);
-		} else if (!tools.UserTools.keyLogin(monLogin, key)) {
-			js = tools.ServiceTools.serviceRefused("Problème de session",-1);
+		//} else if (!tools.UserTools.keyLogin(monLogin, key)) {
+		//js = tools.ServiceTools.serviceRefused("Problème de session",-1);
 		} else {
 			js = tools.FriendTools.addFriend(monLogin, friendLogin);
 		}
@@ -38,8 +38,8 @@ public class Friend {
 			js = tools.ServiceTools.serviceRefused("Paramètre null",-1);
 		} else if (!tools.UserTools.checkUserExist(monLogin)) {
 			js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
-		} else if (!tools.UserTools.keyLogin(monLogin, key)) {
-			js = tools.ServiceTools.serviceRefused("Pas le bon login/mdp",1000);
+		//} else if (!tools.UserTools.keyLogin(monLogin, key)) {
+		//	js = tools.ServiceTools.serviceRefused("Pas le bon login/mdp",1000);
 		}
 		else if(!tools.FriendTools.alreadyFriend(monLogin, friendLogin))
 		{
