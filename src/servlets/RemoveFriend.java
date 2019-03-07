@@ -25,7 +25,7 @@ public class RemoveFriend extends HttpServlet{
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
-			out.print(Friend.removeFriend(monLogin, key, friendLogin));
+			out.print(services.Friend.removeFriend(monLogin, key, friendLogin));
 			out.flush();
 		}
 }

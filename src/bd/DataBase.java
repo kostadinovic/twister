@@ -25,6 +25,11 @@ public class DataBase {
 	}
 
 	public static Connection getMySQLConnection() throws SQLException {
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		}catch(ClassNotFoundException | InstantiationException | IllegalAccessException e){
+			e.printStackTrace();
+		}
 		if (DBStatic.mysql_pooling == false) {
 			return (Connection)(DriverManager.getConnection("jdbc:mysql://" + DBStatic.mysql_host + "/"
 					+DBStatic.mysql_db, DBStatic.mysql_username, DBStatic.mysql_password));

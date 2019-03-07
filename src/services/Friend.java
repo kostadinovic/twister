@@ -34,7 +34,7 @@ public class Friend {
 
 	public static JSONObject removeFriend(String monLogin, String key, String friendLogin) {
 		JSONObject js = null;
-		if (monLogin == null || friendLogin == null) {
+		if (monLogin == null || key == null || friendLogin == null) {
 			js = tools.ServiceTools.serviceRefused("Paramètre null",-1);
 		} else if (!tools.UserTools.checkUserExist(monLogin)) {
 			js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
@@ -43,7 +43,7 @@ public class Friend {
 		}
 		else if(!tools.FriendTools.alreadyFriend(monLogin, friendLogin))
 		{
-			js = tools.ServiceTools.serviceRefused("Déja amis",100);
+			js = tools.ServiceTools.serviceRefused("Ne sont pas amis",100);
 		}
 		else {
 			tools.FriendTools.deleteFriend(monLogin,friendLogin);

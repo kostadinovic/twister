@@ -36,28 +36,19 @@ public class FriendTools {
 		}
 		return ServiceTools.serviceRefused("Erreur lors de l'ajout de l'ami "+friendLogin, 1000);
 	}
-	
+
 	public static JSONObject deleteFriend(String monLogin, String friendLogin) {
-		Connection co = null; 
-		Statement st = null;
 		try {
-			co = DataBase.getMySQLConnection();
-			st = co.createStatement();
-			String query = "DELETE FROM Friends WHERE monLogin =" + monLogin
-					+ " and friendLogin = " + friendLogin;
-			st.executeUpdate(query);
+			Connection c = DataBase.getMySQLConnection();
+			String query = "Delete from Friends where monLogin='" + monLogin + "' and friendLogin='" + friendLogin + "';";
+			Statement s = c.createStatement();
+			int rs = s.executeUpdate(query);
+			s.close();
+			c.close();
 			return ServiceTools.serviceAccepted();
-		} catch (SQLException s) {
-			s.printStackTrace();
-		} finally {
-			try {
-				st.close();
-				co.close();
-			} catch (SQLException ignore) {
-				return ServiceTools.serviceRefused("SQLException", 1000);
-			}
+		} catch (Exception e) {
+			return ServiceTools.serviceRefused("SQLException", 1000);
 		}
-		return ServiceTools.serviceRefused("Erreur lors de la suppresion de l'ami "+friendLogin, 1000);
 	}
 	
 	public static boolean alreadyFriend(String monLogin, String loginFriend) {
@@ -89,10 +80,10 @@ public class FriendTools {
 		try {
 			Connection c = DataBase.getMySQLConnection();
 			Statement s = c.createStatement();
-			String q = "SELECT to_login FROM Friends WHERE from_login='" + login + "';";
+			String q = "SELECT friendLogin FROM Friends WHERE monLogin='" + login + "';";
 			ResultSet rs = s.executeQuery(q);
 			while (rs.next()) {
-				liste.add(rs.getString("to_login"));
+				liste.add(rs.getString("friendLogin"));
 			}
 			obj.put("friends", liste);
 			rs.close();
