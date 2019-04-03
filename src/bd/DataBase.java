@@ -24,7 +24,6 @@ public class DataBase {
 		return dataSource.getConnection();
 	}
 	
-
 	public static Connection getMySQLConnection() throws SQLException{
 		DataBase database = null; 
 		if(DBStatic.mysql_pooling == true) {
