@@ -23,6 +23,7 @@ public class DataBase {
 	public Connection getConnection() throws SQLException {
 		return dataSource.getConnection();
 	}
+	
 
 	public static Connection getMySQLConnection() throws SQLException{
 		DataBase database = null; 
