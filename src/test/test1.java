@@ -16,17 +16,17 @@ public class test1 {
 		System.out.println(user2);
 		*/
 		
-		//JSONObject login1 = User.login("neecak", "123456789", false);
+		//JSONObject login1 = User.login("imaneB", "123456789", false);
 		//System.out.println(login1);
 		
 		//JSONObject logout1 = User.logout("neecak","Ptu4nYabkaTa2dYgpaB8amWqMPL7yXIv");
 		//System.out.println(logout1);
 		
-		//JSONObject friend = Friend.addFriend("neecak","26G0cHXevov2KIlLcs9uzRfi14suP8cV","imaneB");
-		//System.out.println(friend);
-		
-		JSONObject friend = Friend.removeFriend("neecak","26G0cHXevov2KIlLcs9uzRfi14suP8cV","imaneB");
+		JSONObject friend = Friend.addFriend("neecak","26G0cHXevov2KIlLcs9uzRfi14suP8cV","imaneB");
 		System.out.println(friend);
+		
+		//JSONObject friend = Friend.removeFriend("neecak","26G0cHXevov2KIlLcs9uzRfi14suP8cV","imaneB");
+		//System.out.println(friend);
 		
 		
 				
