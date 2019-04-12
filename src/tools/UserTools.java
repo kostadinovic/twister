@@ -91,19 +91,16 @@ public class UserTools {
 		}
 		return mailExists;
 	}
-
 	
 	public static String getKey(String login) {
 		Connection co = null;
 		Statement st = null;
 		ResultSet res = null;
-		String key = "";
+		String key = null;
 		try {
 			co = DataBase.getMySQLConnection();
 			st = co.createStatement();
-			String query = "SELECT Connection.key_co "
-					+ "from Connection, users "
-					+ "where users.login = '" + login + "' and users.id = Connection.id_user";
+			String query = "SELECT key_co from Connection where login ='"+login+"'";
 			res = st.executeQuery(query);
 			if (res.next()) {
 				key = res.getString("key_co");
@@ -118,7 +115,7 @@ public class UserTools {
 			} catch (SQLException ignore) {}
 		}
 		return key;
-}
+	}
 
 
 	public static int getIdUserByKey(String key) {

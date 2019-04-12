@@ -9,41 +9,43 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
+import java.text.SimpleDateFormat;
 import tools.MongoTools;
 
 public class MessageTools {
 	
-	public static boolean addMessage(int id, String login, String message, Date date) {
+	public static boolean addMessage(int id, String login, String message) {
 		MongoDatabase mb = MongoTools.getMyMongoConnexion();
 		MongoCollection<Document> mongoc = mb.getCollection("Message");
-		Document d = new Document();
-		d.append("from_id", id);
-		d.append("from_login", login);
-		d.append("message", message);
-		d.append("date", date);
-		mongoc.insertOne(d);
-		return true;
+		String nowdate = now();
+		Document doc = new Document();
+		doc.append("from_id", id);
+		doc.append("from_login", login);
+		doc.append("message", message);
+		doc.append("date", nowdate);
+		mongoc.insertOne(doc);
+		return !doc.isEmpty();
 	}
 	
 	public static void deleteMessage(String id_message) {
 		MongoDatabase bd = MongoTools.getMyMongoConnexion();
 		MongoCollection<Document> mongoc = bd.getCollection("Message");
-		Document d = new Document();
-		d.append("_id", new ObjectId(id_message));
-		mongoc.deleteOne(d);
+		Document doc = new Document();
+		doc.append("_id", new ObjectId(id_message));
+		mongoc.deleteOne(doc);
 	}
 
 	public static JSONObject listMessages(int id) {
 		JSONObject js = new JSONObject();
 		try {
 			MongoDatabase bd = MongoTools.getMyMongoConnexion();
-			MongoCollection<Document> mongoc = bd.getCollection("Messages");
+			MongoCollection<Document> mongoc = bd.getCollection("Message");
 			Document d = new Document();
 			d.append("from_id", id);
 			MongoCursor<Document> cursor = mongoc.find(d).iterator();
 			while (cursor.hasNext()) {
 				Document dn = cursor.next();
-				js.append(dn.getString("from_name"), dn.getString("message"));
+				js.append(dn.getString("from_login"), dn.getString("message"));
 				System.out.println(dn);
 			}
 		} catch (JSONException e) {
@@ -51,5 +53,10 @@ public class MessageTools {
 		}
 		return js;
 	}	
-} 
-
+	
+	public static String now() {
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String dateStr = format.format(new Date());
+		return dateStr;
+	}
+}

@@ -21,15 +21,9 @@ public class Message {
 			else if(!tools.UserTools.checkUserExist(monLogin)){
 				js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
 			}
-			else if(!tools.UserTools.keyLogin(monLogin, key)){
-				js = tools.ServiceTools.serviceRefused("Problème de session",100);
-			}else{
+			else{
 				int user_id = BDTools.getUserId(monLogin);
-				GregorianCalendar calendrier = new java.util.GregorianCalendar();
-				calendrier.add(Calendar.HOUR, -1);
-				Date date = calendrier.getTime();
-				System.out.println(date);
-				MessageTools.addMessage(user_id, monLogin, message, date);
+				MessageTools.addMessage(user_id, monLogin, message);
 				try {
 					js = new JSONObject();
 					js.put("ajout du message", "ok ");
@@ -49,20 +43,38 @@ public class Message {
 			else if(!tools.UserTools.checkUserExist(monLogin)){
 				js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
 			}
-			else if(!tools.UserTools.keyLogin(monLogin, key)){
+			else if(tools.UserTools.getKey(monLogin) == null){
 				js = tools.ServiceTools.serviceRefused("Problème de session",100);
-			}
-			
-			/*else if(!tools.MessageTools.existsMessage(MessageId))
-			{
-				js = tools.ServiceTools.serviceRefused("Le message est introuvable",-1);
-			}*/
-			
+			}	
 			else{				
 				MessageTools.deleteMessage(messageId);
 				try {
 					js = tools.ServiceTools.serviceAccepted();
 					js.put("Message supprimé", "fini");	
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			return js;	
+		}
+		
+		public static JSONObject listMessages(String monLogin, String key) {
+			JSONObject js = null;
+			if(monLogin == null || key == null){
+				js = tools.ServiceTools.serviceRefused("Paramètre invalide",-1);
+			}
+			else if(!tools.UserTools.checkUserExist(monLogin)){
+				js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
+			}
+			else if(tools.UserTools.getKey(monLogin) == null ){
+				js = tools.ServiceTools.serviceRefused("Problème de session",100);
+			}	
+			else{	
+				int user_id = BDTools.getUserId(monLogin);
+				MessageTools.listMessages(user_id);
+				try {
+					js = tools.ServiceTools.serviceAccepted();	
+					js.put("Fin de la liste de message", "oui");
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}

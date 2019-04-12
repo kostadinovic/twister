@@ -54,7 +54,7 @@ public class ServiceTools {
 		try {
 			Connection c = DataBase.getMySQLConnection();
 			Statement s = c.createStatement();
-			String q = "SELECT * FROM Session WHERE login='" + login + "' and clef='"+ key +"'and date_exp+3600> now() ;";
+			String q = "SELECT * FROM Session WHERE login='" + login + "' and key_co='"+ key +"'and time+1800 > now() ;";
 			ResultSet rs = s.executeQuery(q);
 			
 			if (rs.next()) {
