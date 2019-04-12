@@ -28,24 +28,17 @@ public class test1 {
 		//JSONObject logout1 = User.logout("neecak","Ptu4nYabkaTa2dYgpaB8amWqMPL7yXIv");
 		//System.out.println(logout1);
 		
-<<<<<<< HEAD
 		//JSONObject friend = Friend.addFriend("neecak",UserTools.getKey("neecak"),"imaneB");
 		//System.out.println(friend);
 		
 		//JSONObject friend = Friend.removeFriend("neecak",UserTools.getKey("neecak"),"imaneB");
 		//System.out.println(friend);
-=======
-		JSONObject friend = Friend.addFriend("neecak","26G0cHXevov2KIlLcs9uzRfi14suP8cV","imaneB");
-		System.out.println(friend);
+
+		//JSONObject friend = Friend.addFriend("neecak","26G0cHXevov2KIlLcs9uzRfi14suP8cV","imaneB");
+		//System.out.println(friend);
 		
 		//JSONObject friend = Friend.removeFriend("neecak","26G0cHXevov2KIlLcs9uzRfi14suP8cV","imaneB");
 		//System.out.println(friend);
-		
-		
-				
-		
-	}
->>>>>>> branch 'master' of https://github.com/nemk96/twister.git
 
 		/* SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		String dateStr = format.format(new Date());
