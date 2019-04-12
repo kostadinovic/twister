@@ -23,22 +23,26 @@ public class DataBase {
 	public Connection getConnection() throws SQLException {
 		return dataSource.getConnection();
 	}
-
-	public static Connection getMySQLConnection() throws SQLException {
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-		}catch(ClassNotFoundException | InstantiationException | IllegalAccessException e){
-			e.printStackTrace();
-		}
-		if (DBStatic.mysql_pooling == false) {
-			return (Connection)(DriverManager.getConnection("jdbc:mysql://" + DBStatic.mysql_host + "/"
-					+DBStatic.mysql_db, DBStatic.mysql_username, DBStatic.mysql_password));
-		} else {
-			if (dataBase == null) {
-				dataBase = new DataBase("jdbc/db");
+	
+	public static Connection getMySQLConnection() throws SQLException{
+		DataBase database = null; 
+		if(DBStatic.mysql_pooling == true) {
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 			}
-			return (dataBase.getConnection());
-		} 
+			return(DriverManager.getConnection("jdbc:mysql://" + DBStatic.mysql_host + "/" + DBStatic.mysql_db, DBStatic.mysql_username, DBStatic.mysql_password));
+		}else {
+			if (database == null) {
+				database = new DataBase("jdbc/db");
+			}
+			return database.getConnection();
+		}
 	}
 }
 

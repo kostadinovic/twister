@@ -1,4 +1,8 @@
 /test/
 /bd/
 /services/
+<<<<<<< HEAD
+=======
+/servlets/
+>>>>>>> branch 'master' of https://github.com/nemk96/twister.git
 /tools/
