@@ -224,13 +224,56 @@ public class UserTools {
 			String query = "DELETE from Connection where login ='"+login+"'";
 			st.executeUpdate(query);
 			
-		} catch (SQLException s) {
-			s.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 			return false;
 		} finally {
 			try {
 				st.close();
 				co.close();
+			} catch (SQLException ignore) {}
+		}
+		return true;
+	}
+	
+	public static String resetPassword(String login, String mail, String age) {
+		String pass = null;
+		try {
+			Connection c = DataBase.getMySQLConnection();
+			Statement s = c.createStatement();
+			String q = "SELECT password from users where login = '" + login + "'"
+					+ " and mail = '" + mail + "'" + " and age = '" + age + "'";;
+			ResultSet rs = s.executeQuery(q);
+			if (rs.next()) {
+				pass = rs.getString("password");
+			}
+			rs.close();
+			s.close();
+			c.close();
+
+		} catch (SQLException e) {
+
+		}
+		return pass;
+	}
+
+
+	public static boolean changePass(String login, String newPassword) {
+		Connection c = null;
+		Statement s = null;
+		try {
+			c = DataBase.getMySQLConnection();
+			s = c.createStatement();
+			String query = "UPDATE users set password ='" + newPassword + "'"
+					+ "where login ='" + login + "'";
+			s.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				s.close();
+				c.close();
 			} catch (SQLException ignore) {}
 		}
 		return true;

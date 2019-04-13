@@ -95,7 +95,7 @@ public class User {
 		else if (tools.UserTools.removeConnection(login)) {
 			try {
 				obj = new JSONObject();
-				obj.put("deconnection", "ok ");
+				obj.put("déconnexion", "ok");
 				
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -105,7 +105,7 @@ public class User {
 		{
 			try {
 				obj = new JSONObject();
-				obj.put("deconnection", "failed ");
+				obj.put("déconnexion", "échoué");
 				
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -115,4 +115,62 @@ public class User {
 		return obj;
 		
 	}
+	
+	public static void affmdp(String login, String mail, String age) {
+		String pass = tools.UserTools.resetPassword(login, mail, age);
+		System.out.println("voICI LE PASS" + pass);
+	}
+	
+	
+	
+	public static JSONObject lostPassword(String login, String mail, String age) {
+		JSONObject obj = null;
+		if(login == null || mail == null || age == null) {
+			obj = tools.ServiceTools.serviceRefused("Paramètre vide",-1);
+		}
+		else if(!tools.UserTools.checkUserExist(login) || !tools.UserTools.checkMailExist(mail)) {
+			obj = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
+		}
+		String pass = tools.UserTools.resetPassword(login, mail, age);
+		try {
+			obj = new JSONObject();
+			obj.put("Voici votre mots de passe, ne l'oublier pas", pass);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return obj;
+	}
+	
+	
+	public static JSONObject changePassword(String login, String newPassword,String key){
+		JSONObject obj = null;
+		if(login == null || key == null){
+			obj = tools.ServiceTools.serviceRefused("Paramètre vide",-1);
+		}
+		else if(!tools.UserTools.checkUserExist(login)){
+			obj = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
+		}
+		else if (!tools.UserTools.keyLogin(login, key)) {
+			obj = tools.ServiceTools.serviceRefused("La connexion n'est pas valide",100);
+		boolean change_ok= tools.UserTools.changePass(login, newPassword);
+		if(change_ok) {
+			obj = new JSONObject();
+			try {
+				obj.put("Changement de mots de passe", "ok");
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			}else {
+			obj = new JSONObject();
+			try {
+				obj.put("Changement de mots de passe", "ok");
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			}
+		}
+		return obj;
+	}
+	
+	
 }
