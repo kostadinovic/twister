@@ -21,7 +21,7 @@ public class ListMessage extends HttpServlet{
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		//out.print(services.Message.listMessages(login));
+
 		out.flush();
 		
 	}

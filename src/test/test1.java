@@ -22,8 +22,8 @@ public class test1 {
 		 * http://localhost:8080/twister/CreateUser?nom=salut&prenom=fff&mail=ggg&login=hgghgg&password=123456852&age=99
 		 */
 		
-		//JSONObject login1 = User.login("imaneB", "123456789", false);
-		//System.out.println(login1);
+		JSONObject login1 = User.login("imaneB", "123456789", false);
+		System.out.println(login1);
 		
 		//JSONObject logout1 = User.logout("neecak","Ptu4nYabkaTa2dYgpaB8amWqMPL7yXIv");
 		//System.out.println(logout1);

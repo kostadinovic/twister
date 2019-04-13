@@ -26,6 +26,18 @@
 		<servlet-name>ListFriend</servlet-name> 
 		<servlet-class>servlets.ListFriend</servlet-class> 
 	</servlet>
+	<servlet> 
+		<servlet-name>AddMessage</servlet-name> 
+		<servlet-class>servlets.AddMessage</servlet-class> 
+	</servlet>
+	<servlet> 
+		<servlet-name>RemoveMessage</servlet-name> 
+		<servlet-class>servlets.RemoveMessage</servlet-class> 
+	</servlet>
+	<servlet> 
+		<servlet-name>ListMessage</servlet-name> 
+		<servlet-class>servlets.ListMessage</servlet-class> 
+	</servlet>
 	<servlet-mapping> 
 		<servlet-name>CreateUser</servlet-name> 
 		<url-pattern>/CreateUser</url-pattern> 
@@ -49,5 +61,17 @@
 	<servlet-mapping> 
 		<servlet-name>ListFriend</servlet-name> 
 		<url-pattern>/ListFriend</url-pattern> 
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>AddMessage</servlet-name> 
+		<url-pattern>/AddMessage</url-pattern> 
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>RemoveMessage</servlet-name> 
+		<url-pattern>/RemoveMessage</url-pattern> 
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>ListMessage</servlet-name> 
+		<url-pattern>/ListMessage</url-pattern> 
 	</servlet-mapping>
 </web-app>
