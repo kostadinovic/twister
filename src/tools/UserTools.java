@@ -92,6 +92,31 @@ public class UserTools {
 		return mailExists;
 	}
 	
+	public static String getUserLogin(String key) {
+		Connection co = null;
+		Statement st = null;
+		ResultSet res = null;
+		String login = null;
+		try {
+			co = DataBase.getMySQLConnection();
+			st = co.createStatement();
+			String query = "SELECT login FROM Connection WHERE key_co = '" + key + "'";
+			res = st.executeQuery(query);
+			if (res.next()) {
+				login = res.getString("login");
+			}
+		} catch (SQLException s) {
+			s.printStackTrace();
+		} finally {
+			try {
+				res.close();
+				st.close();
+				co.close();
+			} catch (SQLException ignore) {}
+		}
+		return login;
+	}
+	
 	public static String getKey(String login) {
 		Connection co = null;
 		Statement st = null;
@@ -168,7 +193,6 @@ public class UserTools {
 
 
 	public static boolean verifyPass(String login, String password) {
-		// TODO Auto-generated method stub
 		boolean goodPass = false;
 		try {
 			Connection c = DataBase.getMySQLConnection();

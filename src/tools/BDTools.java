@@ -34,8 +34,6 @@ public class BDTools {
 			return obj;
 		}
 	}
-
-
 	
 	public static boolean checkUserPassword(String login,String password) throws SQLException {
 		Connection co = DataBase.getMySQLConnection();
@@ -51,9 +49,8 @@ public class BDTools {
 		co.close();
 		return false;
 	}
-	
-	//inutile pour l'instant mais peur servir plus tard
-	public static int getUserId(String login) {
+
+	public static int getUserId(String monLogin) {
 		Connection co = null;
 		Statement st = null;
 		ResultSet res = null;
@@ -61,7 +58,7 @@ public class BDTools {
 		try {
 			co = DataBase.getMySQLConnection();
 			st = co.createStatement();
-			String query = "SELECT id FROM users WHERE login = '" + login + "'";
+			String query = "SELECT users.id from users where users.login = '" + monLogin + "'";
 			res = st.executeQuery(query);
 			if (res.next()) {
 				id_user = res.getInt("id");

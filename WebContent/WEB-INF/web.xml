@@ -38,6 +38,22 @@
 		<servlet-name>ListMessage</servlet-name> 
 		<servlet-class>servlets.ListMessage</servlet-class> 
 	</servlet>
+	<servlet> 
+		<servlet-name>LostPassword</servlet-name> 
+		<servlet-class>servlets.LostPassword</servlet-class> 
+	</servlet>
+	<servlet> 
+		<servlet-name>ChangePassword</servlet-name> 
+		<servlet-class>servlets.ChangePassword</servlet-class> 
+	</servlet>
+	<servlet> 
+		<servlet-name>LikeMessage</servlet-name> 
+		<servlet-class>servlets.LikeMessage</servlet-class> 
+	</servlet>
+	<servlet> 
+		<servlet-name>unlikeMessage</servlet-name> 
+		<servlet-class>servlets.unlikeMessage</servlet-class> 
+	</servlet>
 	<servlet-mapping> 
 		<servlet-name>CreateUser</servlet-name> 
 		<url-pattern>/CreateUser</url-pattern> 
@@ -73,5 +89,21 @@
 	<servlet-mapping> 
 		<servlet-name>ListMessage</servlet-name> 
 		<url-pattern>/ListMessage</url-pattern> 
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>LostPassword</servlet-name> 
+		<url-pattern>/LostPassword</url-pattern> 
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>ChangePassword</servlet-name> 
+		<url-pattern>/ChangePassword</url-pattern> 
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>LikeMessage</servlet-name> 
+		<url-pattern>/LikeMessage</url-pattern> 
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>unlikeMessage</servlet-name> 
+		<url-pattern>/unlikeMessage</url-pattern> 
 	</servlet-mapping>
 </web-app>

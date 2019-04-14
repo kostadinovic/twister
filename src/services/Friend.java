@@ -57,4 +57,20 @@ public class Friend {
 		}
 		return js;
 	}
+	
+	public static JSONObject likeMessage(String key, int id_message) {
+		if(key == null || id_message == 0) {
+			return tools.ServiceTools.serviceRefused("Paramètre(s) invalides", -1);		
+		}
+		return tools.FriendTools.addLike(key, id_message);		
+	}
+	
+	public static JSONObject unlikeMessage(String key, int id_message) {
+		if(key == null || id_message == 0) {
+			return tools.ServiceTools.serviceRefused("Paramètre(s) invalides", -1);		
+		}
+		return tools.FriendTools.removeLike(key, id_message);		
+	}
+	
+	
 }

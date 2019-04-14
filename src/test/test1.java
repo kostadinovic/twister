@@ -51,5 +51,11 @@ public class test1 {
 		
 		//JSONObject js = User.changePassword("neecak", "necalol",UserTools.getKey("neecak"));
 		//System.out.println(js);
+		
+		//JSONObject js = Friend.likeMessage(UserTools.getKey("neecak"),1234);
+		//System.out.println(js);
+		
+		JSONObject js = Friend.unlikeMessage(UserTools.getKey("neecak"),1234);
+		System.out.println(js);
 	}
 }
