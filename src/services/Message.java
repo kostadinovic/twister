@@ -13,17 +13,20 @@ import tools.ServiceTools;
 
 public class Message {
 	
-	public static JSONObject addMessage(String monLogin,String key, String message){
+	public static JSONObject addMessage(String login,String key, String message){
 			JSONObject js = null;
-			if(monLogin == null || key == null || message == null){
+			if(login == null || key == null || message == null){
 				js = tools.ServiceTools.serviceRefused("Paramètre invalide",-1);	
 			}
-			else if(!tools.UserTools.checkUserExist(monLogin)){
+			else if(!tools.UserTools.checkUserExist(login)){
 				js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
 			}
+			else if (!tools.UserTools.keyLogin(login, key)) {
+				return tools.ServiceTools.serviceRefused("Problème de session",1000);
+			}
 			else{
-				int user_id = BDTools.getUserId(monLogin);
-				MessageTools.addMessage(user_id, monLogin, message);
+				int user_id = BDTools.getUserId(login);
+				MessageTools.addMessage(user_id, login, message);
 				try {
 					js = new JSONObject();
 					js.put("ajout du message", "ok ");
@@ -35,15 +38,15 @@ public class Message {
 			return js;
 		}
 	
-		public static JSONObject removeMessage(String monLogin,String key, String messageId){
+		public static JSONObject removeMessage(String login,String key, String messageId){
 			JSONObject js = null;
-			if(monLogin == null || key == null || messageId == null){
+			if(login == null || key == null || messageId == null){
 				js = tools.ServiceTools.serviceRefused("Paramètre invalide",-1);
 			}
-			else if(!tools.UserTools.checkUserExist(monLogin)){
+			else if(!tools.UserTools.checkUserExist(login)){
 				js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
 			}
-			else if(tools.UserTools.getKey(monLogin) == null){
+			else if(!tools.UserTools.keyLogin(login, key)){
 				js = tools.ServiceTools.serviceRefused("Problème de session",100);
 			}	
 			else{				
@@ -58,19 +61,19 @@ public class Message {
 			return js;	
 		}
 		
-		public static JSONObject listMessages(String monLogin, String key) {
+		public static JSONObject listMessages(String login, String key) {
 			JSONObject js = null;
-			if(monLogin == null || key == null){
+			if(login == null || key == null){
 				js = tools.ServiceTools.serviceRefused("Paramètre invalide",-1);
 			}
-			else if(!tools.UserTools.checkUserExist(monLogin)){
+			else if(!tools.UserTools.checkUserExist(login)){
 				js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",100);
 			}
-			else if(tools.UserTools.getKey(monLogin) == null ){
+			else if(!tools.UserTools.getKey(login).equalsIgnoreCase(key)){ //verif ok
 				js = tools.ServiceTools.serviceRefused("Problème de session",100);
 			}	
 			else{	
-				int user_id = BDTools.getUserId(monLogin);
+				int user_id = BDTools.getUserId(login);
 				MessageTools.listMessages(user_id);
 				try {
 					js = tools.ServiceTools.serviceAccepted();	

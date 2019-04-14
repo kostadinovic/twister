@@ -31,7 +31,6 @@ public class ServiceTools {
 		JSONObject json = new JSONObject();
 		try {
 			json.put("Status","OK");
-			json.put("Output", new String("OK"));
 		} catch(JSONException e) {
 			e.printStackTrace();
 			return serviceRefused("JSONException",100);
@@ -50,46 +49,26 @@ public class ServiceTools {
 	}
 	
 	public static boolean checkdate(String login, String key) {		
-		boolean check = false;
+		boolean exp = false;
 		try {
 			Connection c = DataBase.getMySQLConnection();
 			Statement s = c.createStatement();
-			String q = "SELECT * FROM Session WHERE login='" + login + "' and key_co='"+ key +"'and time+1800 > now() ;";
+			String q = "SELECT * FROM Connection WHERE login='" + login + "' and key_co='"+ key +"'and time+1800 > now() ;";
 			ResultSet rs = s.executeQuery(q);
 			
 			if (rs.next()) {
-				check = true;
+				exp = true;
 			}
 			s.close();
 			c.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-
 		}
-		if(check)
-		{
-			ServiceTools.updateExpiration(login);
-		}
-		else
+		if(!exp)
 		{
 			User.logout(login, key);
 		}
-		
-		return check;
-	}
-	
-	public static void updateExpiration(String login) {
-		try{
-			Connection c = DataBase.getMySQLConnection();
-			String q = "update Connection set date_exp=now() where login='"+login+"'";
-			Statement s = c.createStatement();
-			int rs = s.executeUpdate(q);
-			s.close();
-			c.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+		return exp;
+	}		
 }

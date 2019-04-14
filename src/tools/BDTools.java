@@ -23,7 +23,8 @@ public class BDTools {
 			s.executeUpdate(q);
 			s.close();
 			c.close();
-			return null;
+			obj = ServiceTools.serviceAccepted();
+			return obj;
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
@@ -73,6 +74,30 @@ public class BDTools {
 			} catch (SQLException ignore) {}
 		}
 		return id_user;
+	}
+
+	public static JSONObject removeUser(String login) {
+		JSONObject obj = null;
+		Connection co = null;
+		Statement st = null;
+		try {
+			co = DataBase.getMySQLConnection();
+			st = co.createStatement();
+			String query = "DELETE from users where login ='"+login+"'";
+			st.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return obj = ServiceTools.serviceRefused("Exception SQL", 1000);
+		} finally {
+			try {
+				st.close();
+				co.close();
+			} catch (SQLException ignore) {}
+		}
+		UserTools.removeConnection(login);
+		obj = ServiceTools.serviceAccepted();
+		return obj;
+
 	}
 }
 

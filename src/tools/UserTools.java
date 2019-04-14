@@ -13,29 +13,7 @@ import org.json.JSONObject;
 import bd.DataBase;
 
 public class UserTools {
-	
-	public static JSONObject insertUserBD(String nom, String prenom,String mail, String login,String password, String age) {
-		JSONObject obj = new JSONObject();
-		try {
-			Connection c = DataBase.getMySQLConnection();
-			String q = "Insert into users values(null, '" + nom + "','" + prenom + "', '" + mail + "', '" + login + "','" 
-			+ password + "','" + age + "');";
-			Statement s = c.createStatement();
-			s.executeUpdate(q);
-			s.close();
-			c.close();
-			return null;
-		} catch (Exception e) {
-			e.printStackTrace();
-			try {
-				obj.put("error", e.getMessage());
-			} catch (JSONException e1) {
-				e1.printStackTrace();
-			}
-			return obj;
-		}
-	}
-	
+		
 	public static boolean checkUserExist(String login){
 		boolean userExists = false;
 		try {
@@ -173,7 +151,7 @@ public class UserTools {
 		try {
 			Connection c = DataBase.getMySQLConnection();
 			Statement s = c.createStatement();
-			String q = "SELECT * FROM Connection WHERE login='" + monLogin + "' and key='"+ key +"' ;";
+			String q = "SELECT * FROM Connection WHERE login='" + monLogin + "' and key_co='"+ key +"' ;";
 			ResultSet rs = s.executeQuery(q);
 			if (rs.next()) {
 				check = true;
@@ -301,5 +279,26 @@ public class UserTools {
 			} catch (SQLException ignore) {}
 		}
 		return true;
+	}
+
+	public static boolean userRoot(String login) {
+		boolean admin = false;
+		try {
+			Connection c = DataBase.getMySQLConnection();
+			Statement s = c.createStatement();
+			String q = "SELECT login from users where login = '" + login + "'"
+					+ " and mode = '" + 1 + "'";
+			ResultSet rs = s.executeQuery(q);
+			if (rs.next()) {
+				admin = true;
+			}
+			rs.close();
+			s.close();
+			c.close();
+
+		} catch (SQLException e) {
+
+		}
+		return admin;
 	}
 }

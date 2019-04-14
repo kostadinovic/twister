@@ -22,14 +22,17 @@ public class test1 {
 		 * http://localhost:8080/twister/CreateUser?nom=salut&prenom=fff&mail=ggg&login=hgghgg&password=123456852&age=99
 		 */
 		
-		//JSONObject login1 = User.login("imaneB", "123456789", false);
+		//JSONObject login1 = User.login("neecak", "123456789", false);
 		//System.out.println(login1);
 		
-		//JSONObject logout1 = User.logout("neecak","Ptu4nYabkaTa2dYgpaB8amWqMPL7yXIv");
+		JSONObject login2 = User.login("imaneB", "123456789", false);
+		System.out.println(login2);
+
+		//JSONObject logout1 = User.logout("neecak",UserTools.getKey("neecak"));
 		//System.out.println(logout1);
 		
 		//JSONObject friend = Friend.addFriend("neecak",UserTools.getKey("neecak"),"imaneB");
-		//System.out.println(friend);
+		//System.out.println(friend); 
 		
 		//JSONObject friend = Friend.removeFriend("neecak",UserTools.getKey("neecak"),"imaneB");
 		//System.out.println(friend);
@@ -52,10 +55,29 @@ public class test1 {
 		//JSONObject js = User.changePassword("neecak", "necalol",UserTools.getKey("neecak"));
 		//System.out.println(js);
 		
-		//JSONObject js = Friend.likeMessage(UserTools.getKey("neecak"),1234);
+		//JSONObject js = Friend.likeMessage(UserTools.getKey("neecak"),2345555);
 		//System.out.println(js);
 		
-		JSONObject js = Friend.unlikeMessage(UserTools.getKey("neecak"),1234);
-		System.out.println(js);
+		//JSONObject js = Friend.unlikeMessage(UserTools.getKey("neecak"),1234);
+		//System.out.println(js);
+		
+		//JSONObject js = Friend.listFriends("neecak");
+		//System.out.println(js);
+		
+		// TEST ROOT MDP
+		
+		//JSONObject login1 = User.login("neecak", "123456789", true);
+		//System.out.println(login1);
+		
+		//JSONObject js = User.changePassword("imaneB", "JADORE3I017",UserTools.getKey("neecak"));
+		//System.out.println(js);
+		
+		//JSONObject js = User.lostPassword("imaneB", "ben.imane@hotmail.fr", "23");
+		//System.out.println(js);
+		
+		//JSONObject js = User.removeUser("imaneB",UserTools.getKey("neecak"));
+		//System.out.println(js);
+		
+		
 	}
 }
