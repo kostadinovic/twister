@@ -25,8 +25,8 @@ public class test1 {
 		//JSONObject login1 = User.login("neecak", "123456789", false);
 		//System.out.println(login1);
 		
-		JSONObject login2 = User.login("imaneB", "123456789", false);
-		System.out.println(login2);
+		//JSONObject login2 = User.login("imaneB", "123456789", false);
+		//System.out.println(login2);
 
 		//JSONObject logout1 = User.logout("neecak",UserTools.getKey("neecak"));
 		//System.out.println(logout1);
@@ -55,8 +55,8 @@ public class test1 {
 		//JSONObject js = User.changePassword("neecak", "necalol",UserTools.getKey("neecak"));
 		//System.out.println(js);
 		
-		//JSONObject js = Friend.likeMessage(UserTools.getKey("neecak"),2345555);
-		//System.out.println(js);
+		JSONObject js = Friend.likeMessage(UserTools.getKey("neecak"),2345555);
+		System.out.println(js);
 		
 		//JSONObject js = Friend.unlikeMessage(UserTools.getKey("neecak"),1234);
 		//System.out.println(js);
