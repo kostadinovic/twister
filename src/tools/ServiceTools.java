@@ -65,9 +65,7 @@ public class ServiceTools {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Exp = " + exp);
 		if(exp){
-			System.out.println("je suis la");
 			User.logout(login, key);
 			return false;
 		}
