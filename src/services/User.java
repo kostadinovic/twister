@@ -46,6 +46,9 @@ public class User {
 		else if(!tools.UserTools.verifyPass(login ,password)){
 			obj = tools.ServiceTools.serviceRefused("Mots de passe incorrect",-1);
 		}
+		else if(tools.UserTools.alreadyLog(login)) {
+			obj = tools.ServiceTools.serviceRefused("Utilisateurs déja connecté",1000);
+		}
 		else{
 			String key = ServiceTools.genKey();
 			obj = new JSONObject();
@@ -123,7 +126,7 @@ public class User {
 	
 	public static JSONObject changePassword(String login, String newPassword,String key){
 		JSONObject obj = null;
-		if(login == null || key == null){
+		if(login == null || key == null || newPassword == null){
 			obj = tools.ServiceTools.serviceRefused("Paramètre vide",-1);
 		}
 		else if(!tools.UserTools.checkUserExist(login)){
@@ -131,7 +134,8 @@ public class User {
 		}
 		else if (!tools.UserTools.keyLogin(login, key) && !tools.UserTools.userRoot(login)) {
 			obj = tools.ServiceTools.serviceRefused("La connexion n'est pas valide",1000);
-		boolean change_ok= tools.UserTools.changePass(login, newPassword);
+		}
+		boolean change_ok = tools.UserTools.changePass(login, newPassword);
 		if(change_ok) {
 			obj = new JSONObject();
 			try {
@@ -147,9 +151,8 @@ public class User {
 				e.printStackTrace();
 				}
 			}
-		}
 		return obj;
-	}
+		}
 	
 	public static JSONObject removeUser(String login,String key){
 		JSONObject obj = null;

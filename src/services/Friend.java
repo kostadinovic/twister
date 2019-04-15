@@ -26,7 +26,7 @@ public class Friend {
 			js = tools.ServiceTools.serviceRefused("Paramètre null",-1);
 		} else if (!tools.UserTools.checkUserExist(login)) {
 			js = tools.ServiceTools.serviceRefused("L'utilisateurs n'existe pas",-1);
-		} else if (!tools.UserTools.keyLogin(login, UserTools.getKey("neecak"))) {
+		} else if (!tools.UserTools.keyLogin(login, UserTools.getKey(login))) {
 			js = tools.ServiceTools.serviceRefused("Problème de session",1000);
 		} else {
 			js = tools.FriendTools.listFriends(login);

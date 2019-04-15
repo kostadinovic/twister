@@ -254,7 +254,7 @@ public class UserTools {
 			c.close();
 
 		} catch (SQLException e) {
-
+			System.out.println("SQLEXCEPTION dans resetpassword");
 		}
 		return pass;
 	}
@@ -300,5 +300,23 @@ public class UserTools {
 
 		}
 		return admin;
+	}
+	
+	public static boolean alreadyLog(String login) {
+		boolean log = false;
+		try {
+			Connection c = DataBase.getMySQLConnection();
+			Statement s = c.createStatement();
+			String q = "SELECT * FROM Connection WHERE login='" + login + "' ;";
+			ResultSet rs = s.executeQuery(q);
+			if (rs.next()) {
+				log = true;
+			}
+			s.close();
+			c.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return log;
 	}
 }
