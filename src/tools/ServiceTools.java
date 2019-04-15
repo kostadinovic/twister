@@ -61,14 +61,16 @@ public class ServiceTools {
 			}
 			s.close();
 			c.close();
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if(!exp)
-		{
+		System.out.println("Exp = " + exp);
+		if(exp){
+			System.out.println("je suis la");
 			User.logout(login, key);
+			return false;
 		}
-		return exp;
+		return true;
 	}		
 }

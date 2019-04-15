@@ -5,7 +5,7 @@ import java.util.Date;
 
 import org.json.JSONObject;
 import services.*;
-
+import tools.ServiceTools;
 import tools.UserTools;
 
 public class test1 {
@@ -45,6 +45,9 @@ public class test1 {
 		
 		//JSONObject friend = Friend.addFriend("neecak",UserTools.getKey("neecak"),"imaneB");
 		//System.out.println(friend); 
+		
+		System.out.println(ServiceTools.checkdate("neecak", UserTools.getKey("neecak")));
+		
 		
 		//JSONObject friend = Friend.removeFriend("neecak",UserTools.getKey("neecak"),"imaneB");
 		//System.out.println(friend);
