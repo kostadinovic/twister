@@ -12,12 +12,12 @@ public class test1 {
 	
 	public static void main(String[] args) {
 		
-		/*
-		JSONObject user1 = User.createUser("kostadinovic", "nemanja", "nemania-srb@live.fr", "neecak", "123456789","22");
-		System.out.println(user1);
-		JSONObject user2 = User.createUser("benchara", "imane", "ben.imane@hotmail.fr", "imaneB", "123456789","23");
-		System.out.println(user2);
-		*/
+		
+		//JSONObject user1 = User.createUser("kostadinovic", "nemanja", "nemania-srb@li.fr", "neak", "123456789","22","123456789");
+		//System.out.println(user1);
+		//JSONObject user2 = User.createUser("benchara", "imane", "ben.imane@hotmail.fr", "imaneB", "123456789","23");
+		//System.out.println(user2);
+	
 		
 		//JSONObject user2 = User.createUser("benchra", "imne", "ben.imane@hotail.fr", "imane", "123456789","16");
 		//System.out.println(user2);
@@ -46,7 +46,7 @@ public class test1 {
 		//JSONObject friend = Friend.addFriend("neecak",UserTools.getKey("neecak"),"imaneB");
 		//System.out.println(friend); 
 		
-		System.out.println(ServiceTools.checkdate("neecak", UserTools.getKey("neecak")));
+		//System.out.println(ServiceTools.checkdate("neecak", UserTools.getKey("neecak")));
 		
 		
 		//JSONObject friend = Friend.removeFriend("neecak",UserTools.getKey("neecak"),"imaneB");
@@ -77,7 +77,7 @@ public class test1 {
 		
 		// TEST ROOT MDP
 		
-		//JSONObject login1 = User.login("neecak", "imane", true);
+		//JSONObject login1 = User.login("imane", "123456789", false);
 		//System.out.println(login1);
 		
 		//JSONObject js = User.changePassword("imaneB", "JADORE3I017",UserTools.getKey("neecak"));
@@ -86,9 +86,14 @@ public class test1 {
 		//JSONObject js = User.lostPassword("imaneB", "ben.imane@hotmail.fr", "23");
 		//System.out.println(js);
 		
-		//JSONObject js = User.removeUser("imaneB",UserTools.getKey("neecak"));
+		//JSONObject js = User.removeUser("imaneB",UserTools.getKey("imaneB"));
 		//System.out.println(js);
 		
-		// mail existe déja
+		// + removeLike ++ remove msg avec id
+		
+		JSONObject login1 = User.afficheProfil("neecak", UserTools.getKey("neecak"));
+		System.out.println(login1);
+		
+
 	}
 }

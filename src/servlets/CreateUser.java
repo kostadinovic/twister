@@ -19,7 +19,8 @@ public class CreateUser extends HttpServlet {
 		String mail = request.getParameter("mail");
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
-		String age = request.getParameter("age");		
+		String age = request.getParameter("age");
+		String password2 = request.getParameter("password2");
 		response.setContentType("application/json");
 		PrintWriter out = null;
 		try {
@@ -28,7 +29,7 @@ public class CreateUser extends HttpServlet {
 			e.printStackTrace();
 		}
 		JSONObject js = new JSONObject();
-		js=services.User.createUser(nom, prenom, mail, login, password, age);
+		js=services.User.createUser(nom, prenom, mail, login, password, age, password2);
 		out.println(js);
 		out.flush();
 	}

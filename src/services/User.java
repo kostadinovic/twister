@@ -9,7 +9,7 @@ import tools.UserTools;
 public class User {
 	
 	
-	public static JSONObject createUser(String nom, String prenom, String mail, String login, String password,String age) {
+	public static JSONObject createUser(String nom, String prenom, String mail, String login, String password,String age, String password2) {
 		JSONObject js = new JSONObject();
 		if (nom == null || prenom == null || mail == null || login == null || password == null || age == null) {
 			return ServiceTools.serviceRefused("Paramètre invalide", -1);
@@ -19,8 +19,8 @@ public class User {
 			return ServiceTools.serviceRefused("Login existe déja", 1000);
 		}
 		
-		if(!UserTools.checkSecurityPass(password)) {
-			return tools.ServiceTools.serviceRefused("Le mots de passe est trop faible", -1);
+		if(!UserTools.checkSecurityPass(password) || !UserTools.checkPassConf(password,password2)) {
+			return tools.ServiceTools.serviceRefused("Le mots de passe est trop faible ou les deux mots de passe sont différents", -1);
 		}
 		
 		if (UserTools.checkMailExist(mail)) {
@@ -31,6 +31,20 @@ public class User {
 		}
 		js = tools.BDTools.insertUserBD(nom,prenom,mail,login,password,age);
 		return js;
+	}
+	
+	public static JSONObject afficheProfil(String login,String key) {
+		JSONObject obj = new JSONObject();
+		if (login == null || key == null) {
+			return ServiceTools.serviceRefused("Paramètre invalide", -1);
+		}
+		else if(!tools.UserTools.checkUserExist(login)){
+			return tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",1000);
+		}
+		else if (!tools.UserTools.keyLogin(login, key)) {
+			return tools.ServiceTools.serviceRefused("Problème de session",1000);
+		}
+		return obj = tools.UserTools.seeProfil(login);
 	}
 	
 	
@@ -115,7 +129,7 @@ public class User {
 		String pass = tools.UserTools.resetPassword(login, mail, age);
 		try {
 			obj = new JSONObject();
-			obj.put("Voici votre mot de passe, ne l'oublier pas", pass);
+			obj.put("Voici votre mot de passe, ne l'oubliez pas", pass);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

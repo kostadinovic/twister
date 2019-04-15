@@ -163,7 +163,7 @@ public class UserTools {
 			e.printStackTrace();
 		}
 		if(check){
-			check = ServiceTools.checkdate(monLogin, key);
+			check = true; //ServiceTools.checkdate(monLogin, key);
 		}
 		
 		return check; //true si ok 
@@ -328,5 +328,45 @@ public class UserTools {
 			return false;
 		}
 		return true;
+	}
+
+	public static boolean checkPassConf(String password, String password2) {
+		return (password == password2);
+	}
+
+	public static JSONObject seeProfil(String login) {
+		String nom=null;
+		String prenom=null;
+		String mail=null;
+		String age=null;
+		JSONObject js = new JSONObject();
+		try {
+			Connection c = DataBase.getMySQLConnection();
+			Statement s = c.createStatement();
+			String q = "SELECT nom,prenom,mail,age from users where login = '" +login+ "' ;";
+			ResultSet rs = s.executeQuery(q);
+			if (rs.next()) {
+				nom = rs.getString("nom");
+				prenom = rs.getString("prenom");
+				mail = rs.getString("mail");
+				age = rs.getString("age");
+				js.put("nom",nom);
+				js.put("prenom",prenom);
+				js.put("age",age);
+				js.put("mail",mail);
+				
+			}
+			rs.close();
+			s.close();
+			c.close();
+
+		} catch (SQLException e) {
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return js;
+		
 	}
 }
