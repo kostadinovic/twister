@@ -26,9 +26,8 @@ public class User {
 		if (UserTools.checkMailExist(mail)) {
 			return ServiceTools.serviceRefused("L'adresse mail existe déja", 1000);
 		}
-		
-		if(Integer.parseInt(age)<16) {
-			return tools.ServiceTools.serviceRefused("Age < 16", -1);
+		if(!UserTools.verifierAge(age)) {
+			return tools.ServiceTools.serviceRefused("Age incorrecte", -1);
 		}
 		js = tools.BDTools.insertUserBD(nom,prenom,mail,login,password,age);
 		return js;
@@ -53,7 +52,7 @@ public class User {
 			String key = ServiceTools.genKey();
 			obj = new JSONObject();
 			try {
-				if(UserTools.addConnection(login, root)){
+				if(UserTools.addConnection(login, root, key)){
 					obj.put("Connexion", "ok ");
 					obj.put("Login", login);
 					obj.put("Clé", key);

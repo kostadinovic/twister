@@ -6,7 +6,7 @@ import tools.UserTools;
 public class testMessage {
 	
 	public  static void main(String[] args) {
-		//JSONObject js = services.Message.addMessage("neecak",UserTools.getKey("neecak"),"salutNiko");
+		//JSONObject js = services.Message.addMessage("neecak",UserTools.getKey("neecak"),"salutToi");
 		//System.out.println(js);
 		
 		//boolean b = tools.MessageTools.addMessage(1, "nem", "sorry");

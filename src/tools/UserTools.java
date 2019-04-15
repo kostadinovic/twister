@@ -2,6 +2,7 @@ package tools;
 
 
 import java.sql.Connection;
+import java.math.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -163,7 +164,7 @@ public class UserTools {
 		}
 		if(check)
 		{
-			check = ServiceTools.checkdate(monLogin, key);
+			check = true; //ServiceTools.checkdate(monLogin, key);
 		}
 		
 		return check;
@@ -193,11 +194,9 @@ public class UserTools {
 	}
 
 
-	public static boolean addConnection(String id_user, boolean root) {
+	public static boolean addConnection(String id_user, boolean root, String key) {
 		Connection con = null;
 		Statement stat = null;
-		String key = tools.ServiceTools.genKey();
-		
 		try {
 			con = DataBase.getMySQLConnection();
 			stat = con.createStatement();
@@ -318,5 +317,17 @@ public class UserTools {
 			e.printStackTrace();
 		}		
 		return log;
+	}
+
+	public static boolean verifierAge(String age) {
+		try {
+			int a = Integer.parseInt(age);
+			if(a < 16 || a > 99) {
+				return false;
+			}
+		}catch(Exception e) {
+			return false;
+		}
+		return true;
 	}
 }

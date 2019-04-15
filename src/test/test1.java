@@ -19,21 +19,29 @@ public class test1 {
 		System.out.println(user2);
 		*/
 		
+		//JSONObject user2 = User.createUser("benchra", "imne", "ben.imane@hotail.fr", "imane", "123456789","16");
+		//System.out.println(user2);
+		
 		/* 
 		 * http://localhost:8080/twister/CreateUser?nom=salut&prenom=fff&mail=ggg&login=hgghgg&password=123456852&age=99
 		 */
 		
-		//boolean b = UserTools.alreadyLog("neeak");
+		//boolean b = UserTools.alreadyLog("neecak");
 		//System.out.println(b);
 		
-		//JSONObject login1 = User.login("neecak", "123456789", false);
-		//System.out.println(login1);
+		/*
+		JSONObject login1 = User.login("neecak", "123456789", true);
+		System.out.println(login1);
+		JSONObject login2 = User.login("imaneB", "123456789", false);
+		System.out.println(login2);
+		*/
 		
-		//JSONObject login2 = User.login("imaneB", "123456789", false);
-		//System.out.println(login2);
-
-		//JSONObject logout1 = User.logout("neecak",UserTools.getKey("neecak"));
+		
+		//JSONObject logout1 = User.logout("imaneB",UserTools.getKey("imaneB"));
 		//System.out.println(logout1);
+		
+		//String s = UserTools.getKey("neecak");
+		//System.out.println(s);
 		
 		//JSONObject friend = Friend.addFriend("neecak",UserTools.getKey("neecak"),"imaneB");
 		//System.out.println(friend); 
@@ -54,7 +62,7 @@ public class test1 {
 		//JSONObject js = User.lostPassword("neecak", "nemania-srb@live.fr", "22");
 		//System.out.println(js);
 
-		//JSONObject js = User.changePassword("neecak", "necalol",UserTools.getKey("neecak"));
+		//JSONObject js = User.changePassword("neecak", "imane",UserTools.getKey("neecak"));
 		//System.out.println(js);
 		
 		//JSONObject js = Friend.likeMessage(UserTools.getKey("neecak"),2345555);
@@ -62,13 +70,11 @@ public class test1 {
 		
 		//JSONObject js = Friend.unlikeMessage(UserTools.getKey("neecak"),2345555);
 		//System.out.println(js);
-		
-		//JSONObject js = Friend.listFriends("neecak");
-		//System.out.println(js);
+
 		
 		// TEST ROOT MDP
 		
-		//JSONObject login1 = User.login("neecak", "necalol", true);
+		//JSONObject login1 = User.login("neecak", "imane", true);
 		//System.out.println(login1);
 		
 		//JSONObject js = User.changePassword("imaneB", "JADORE3I017",UserTools.getKey("neecak"));
