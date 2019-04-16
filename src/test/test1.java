@@ -44,7 +44,7 @@ public class test1 {
 		//System.out.println(s);
 		
 		//JSONObject friend = Friend.addFriend("neecak",UserTools.getKey("neecak"),"imaneB");
-		//System.out.println(friend); 
+		//sSystem.out.println(friend); 
 		
 		//System.out.println(ServiceTools.checkdate("neecak", UserTools.getKey("neecak")));
 		
@@ -91,9 +91,8 @@ public class test1 {
 		
 		// + removeLike ++ remove msg avec id
 		
-		JSONObject login1 = User.afficheProfil("neecak", UserTools.getKey("neecak"));
-		System.out.println(login1);
-		
+		//JSONObject login1 = User.afficheProfil("neecak", UserTools.getKey("neecak"));
+		//System.out.println(login1);	
 
 	}
 }

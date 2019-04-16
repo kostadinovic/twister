@@ -331,7 +331,7 @@ public class UserTools {
 	}
 
 	public static boolean checkPassConf(String password, String password2) {
-		return (password == password2);
+		return (password.contentEquals(password2));
 	}
 
 	public static JSONObject seeProfil(String login) {
