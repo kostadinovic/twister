@@ -99,6 +99,36 @@ public class BDTools {
 		return obj;
 
 	}
+
+	public static JSONObject listUser() {
+		JSONObject obj = new JSONObject();
+		Connection co = null;
+		Statement st = null;
+		String userlog = "lol";
+		try {
+			co = DataBase.getMySQLConnection();
+			st = co.createStatement();
+			String query = "SELECT login from users;";
+			ResultSet rs = st.executeQuery(query);
+			int i = 0;
+			while(rs.next()) {
+				userlog = rs.getString("login");
+				obj.put("User"+i, userlog);	
+				i++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return obj = ServiceTools.serviceRefused("Exception SQL", 1000);
+		} catch (JSONException e) {
+			return obj = ServiceTools.serviceRefused("Exception JSON", 100);
+		} finally {
+			try {
+				st.close();
+				co.close();
+			} catch (SQLException ignore) {}
+		}
+		return obj;
+	}
 }
 
 

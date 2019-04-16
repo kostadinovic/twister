@@ -189,4 +189,10 @@ public class User {
 		}
 		return obj;
 	}
+	
+	public static JSONObject listUser() {
+		JSONObject obj = tools.BDTools.listUser();
+		return obj;
+		
+	}
 }

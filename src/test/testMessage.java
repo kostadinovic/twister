@@ -15,7 +15,7 @@ public class testMessage {
 		//JSONObject js = services.Message.removeMessage("neecak",UserTools.getKey("neecak"),"5cb45d4eea0d8467f6a31cc5");
 		//System.out.println(js);
 		
-		//JSONObject js2 = services.Message.listMessages("neecak",UserTools.getKey("neecak"));
-		//System.out.println(js2);
+		JSONObject js2 = services.Message.listMessages("neecak",UserTools.getKey("neecak"));
+		System.out.println(js2);
 	}
 }

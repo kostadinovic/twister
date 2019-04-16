@@ -14,6 +14,8 @@ public class ListMessage extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) {
 		String login = request.getParameter("login");
+		String key = request.getParameter("key");
+		
 		response.setContentType("application/json");
 		PrintWriter out = null;
 		try {
@@ -21,8 +23,8 @@ public class ListMessage extends HttpServlet{
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-
-		out.flush();
 		
+		out.print(services.Message.listMessages(login, key));
+		out.flush();
 	}
 }

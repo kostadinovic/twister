@@ -93,6 +93,13 @@ public class test1 {
 		
 		//JSONObject login1 = User.afficheProfil("neecak", UserTools.getKey("neecak"));
 		//System.out.println(login1);	
+		
+		//JSONObject listU = User.listUser();
+		//System.out.println(listU);
+		
+		JSONObject js = services.Message.listMessages("neecak", UserTools.getKey("neecak"));
+		System.out.println(js);
+		
 
 	}
 }

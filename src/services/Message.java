@@ -74,13 +74,7 @@ public class Message {
 			}	
 			else{	
 				int user_id = BDTools.getUserId(login);
-				MessageTools.listMessages(user_id);
-				try {
-					js = tools.ServiceTools.serviceAccepted();	
-					js.put("Fin de la liste de message", "oui");
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+				js = MessageTools.listMessages(user_id);
 			}
 			return js;	
 		}
