@@ -193,6 +193,15 @@ public class User {
 	public static JSONObject listUser() {
 		JSONObject obj = tools.BDTools.listUser();
 		return obj;
-		
+	}
+	
+	public static JSONObject getKeyJS(String login) {
+		JSONObject js = new JSONObject();
+		try {
+			js.put("Key", UserTools.getKey(login));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return js;
 	}
 }
