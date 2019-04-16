@@ -13,8 +13,8 @@ public class test1 {
 	public static void main(String[] args) {
 		
 		
-		JSONObject user1 = User.createUser("kostadinovic", "nemanja", "nemaia-srb@li.fr", "neecak", "123456789","22","123456789");
-		System.out.println(user1);
+		//JSONObject user1 = User.createUser("kostadinovic", "nemanja", "nemaia-srb@li.fr", "neecak", "123456789","22","123456789");
+		//System.out.println(user1);
 		//JSONObject user2 = User.createUser("benchara", "imane", "ben.imane@hotmail.fr", "imaneB", "123456789","23");
 		//System.out.println(user2);
 	
@@ -29,12 +29,12 @@ public class test1 {
 		//boolean b = UserTools.alreadyLog("neecak");
 		//System.out.println(b);
 		
-		/*
-		JSONObject login1 = User.login("neecak", "123456789", true);
-		System.out.println(login1);
-		JSONObject login2 = User.login("imaneB", "123456789", false);
-		System.out.println(login2);
-		*/
+		
+		//JSONObject login1 = User.login("neecak", "123456789", true);
+		//System.out.println(login1);
+		//JSONObject login2 = User.login("imaneB", "123456789", false);
+		//System.out.println(login2);
+		
 		
 		
 		//JSONObject logout1 = User.logout("imaneB",UserTools.getKey("imaneB"));
@@ -94,14 +94,14 @@ public class test1 {
 		//JSONObject login1 = User.afficheProfil("neecak", UserTools.getKey("neecak"));
 		//System.out.println(login1);	
 		
-		//JSONObject listU = User.listUser();
-		//System.out.println(listU);
+		JSONObject listU = User.listUser("neecak");
+		System.out.println(listU);
 		
 		//JSONObject js = services.Message.listMessages("neecak", UserTools.getKey("neecak"));
 		//System.out.println(js);
 		
-		System.out.println(UserTools.checkPassConf("neecak", "neecak"));
-		
+		//System.out.println(UserTools.checkPassConf("neecak", "neecak"));
+
 
 	}
 }

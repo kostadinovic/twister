@@ -190,8 +190,8 @@ public class User {
 		return obj;
 	}
 	
-	public static JSONObject listUser() {
-		JSONObject obj = tools.BDTools.listUser();
+	public static JSONObject listUser(String login) {
+		JSONObject obj = tools.BDTools.listUser(login);
 		return obj;
 	}
 	

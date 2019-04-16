@@ -100,7 +100,7 @@ public class BDTools {
 
 	}
 
-	public static JSONObject listUser() {
+	public static JSONObject listUser(String login) {
 		JSONObject obj = new JSONObject();
 		Connection co = null;
 		Statement st = null;
@@ -108,7 +108,7 @@ public class BDTools {
 		try {
 			co = DataBase.getMySQLConnection();
 			st = co.createStatement();
-			String query = "SELECT login from users;";
+			String query = "SELECT login from users where login <>'"+login+"'";
 			ResultSet rs = st.executeQuery(query);
 			int i = 0;
 			while(rs.next()) {

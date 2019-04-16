@@ -13,6 +13,7 @@ public class ListUser extends HttpServlet{
 	public ListUser() {}
 	
 	protected void doGet(HttpServletRequest request,HttpServletResponse response){
+		String login = request.getParameter("login");
 		response.setContentType("application/json");
 		PrintWriter out = null;
 		try {
@@ -21,7 +22,7 @@ public class ListUser extends HttpServlet{
 			e.printStackTrace();
 		} 
 		
-		out.print(services.User.listUser());
+		out.print(services.User.listUser(login));
 		out.flush();
 	}
 }
