@@ -19,6 +19,10 @@
 		<servlet-class>servlets.AddFriend</servlet-class> 
 	</servlet>
 	<servlet> 
+		<servlet-name>ListUser</servlet-name> 
+		<servlet-class>servlets.ListUser</servlet-class> 
+	</servlet>
+	<servlet> 
 		<servlet-name>RemoveFriend</servlet-name> 
 		<servlet-class>servlets.RemoveFriend</servlet-class> 
 	</servlet>
@@ -109,6 +113,10 @@
 	<servlet-mapping> 
 		<servlet-name>unlikeMessage</servlet-name> 
 		<url-pattern>/unlikeMessage</url-pattern> 
+	</servlet-mapping>
+	<servlet-mapping> 
+		<servlet-name>ListUser</servlet-name> 
+		<url-pattern>/ListUser</url-pattern> 
 	</servlet-mapping>
 	<servlet-mapping> 
 		<servlet-name>RemoveUser</servlet-name> 
