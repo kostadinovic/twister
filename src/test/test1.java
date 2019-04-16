@@ -13,8 +13,8 @@ public class test1 {
 	public static void main(String[] args) {
 		
 		
-		//JSONObject user1 = User.createUser("kostadinovic", "nemanja", "nemania-srb@li.fr", "neak", "123456789","22","123456789");
-		//System.out.println(user1);
+		JSONObject user1 = User.createUser("kostadinovic", "nemanja", "nemaia-srb@li.fr", "neecak", "123456789","22","123456789");
+		System.out.println(user1);
 		//JSONObject user2 = User.createUser("benchara", "imane", "ben.imane@hotmail.fr", "imaneB", "123456789","23");
 		//System.out.println(user2);
 	
@@ -97,8 +97,10 @@ public class test1 {
 		//JSONObject listU = User.listUser();
 		//System.out.println(listU);
 		
-		JSONObject js = services.Message.listMessages("neecak", UserTools.getKey("neecak"));
-		System.out.println(js);
+		//JSONObject js = services.Message.listMessages("neecak", UserTools.getKey("neecak"));
+		//System.out.println(js);
+		
+		System.out.println(UserTools.checkPassConf("neecak", "neecak"));
 		
 
 	}
