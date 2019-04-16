@@ -22,6 +22,7 @@ public class ListFriend extends HttpServlet{
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
+		
 		out.print(services.Friend.listFriends(login));
 		out.flush();
 	}
