@@ -14,6 +14,9 @@ public class Friend {
 			js = tools.ServiceTools.serviceRefused("L'utilisateur n'existe pas",-1);
 		} else if (!tools.UserTools.keyLogin(monLogin, key)) {
 			js = tools.ServiceTools.serviceRefused("Probeme de session",-1);
+		}
+		else if((UserTools.checkPassConf(friendLogin,tools.UserTools.getUserLogin(key)))){
+			js = tools.ServiceTools.serviceRefused("Vous ne pouvez pas vous ajoutez comme ami",-1);
 		} else {
 			js = tools.FriendTools.addFriend(monLogin, friendLogin);
 		}

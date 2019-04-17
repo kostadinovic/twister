@@ -43,8 +43,12 @@ public class test1 {
 		//String s = UserTools.getKey("neecak");
 		//System.out.println(s);
 		
-		//JSONObject friend = Friend.addFriend("neecak",UserTools.getKey("neecak"),"imaneB");
-		//sSystem.out.println(friend); 
+		JSONObject friend = Friend.addFriend("neecak",UserTools.getKey("neecak"),"neecak");
+		System.out.println(friend); 
+		
+		
+		
+		//System.out.println(UserTools.getUserLogin(UserTools.getKey("neecak")));
 		
 		//System.out.println(ServiceTools.checkdate("neecak", UserTools.getKey("neecak")));
 		
@@ -94,8 +98,8 @@ public class test1 {
 		//JSONObject login1 = User.afficheProfil("neecak", UserTools.getKey("neecak"));
 		//System.out.println(login1);	
 		
-		JSONObject listU = User.listUser("neecak");
-		System.out.println(listU);
+		//JSONObject listU = User.listUser("neecak");
+		//System.out.println(listU);
 		
 		//JSONObject js = services.Message.listMessages("neecak", UserTools.getKey("neecak"));
 		//System.out.println(js);
