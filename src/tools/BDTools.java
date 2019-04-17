@@ -129,6 +129,55 @@ public class BDTools {
 		}
 		return obj;
 	}
+	
+	
+	public static int nbUserCo() {
+		Connection co = null;
+		Statement st = null;
+		ResultSet res = null;
+		int nb = 0;
+		try {
+			co = DataBase.getMySQLConnection();
+			st = co.createStatement();
+			String query = "SELECT * from Connection";
+			res = st.executeQuery(query);
+			while(res.next()) {
+				nb++;
+			}
+		} catch (SQLException s) {
+			s.printStackTrace();
+		} finally {
+			try {
+				res.close();
+				st.close();
+				co.close();
+			} catch (SQLException ignore) {}
+		}
+		return nb;
+	}
+	
+	public static int nbUser() {
+		Connection co = null;
+		Statement st = null;
+		int nb = 0;
+		try {
+			co = DataBase.getMySQLConnection();
+			st = co.createStatement();
+			String query = "SELECT login from users";
+			ResultSet rs = st.executeQuery(query);
+			while(rs.next()) {
+				nb++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				st.close();
+				co.close();
+			} catch (SQLException ignore) {}
+		}
+		return nb;
+	}
 }
 
 

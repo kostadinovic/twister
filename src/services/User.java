@@ -3,6 +3,7 @@ package services;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import tools.BDTools;
 import tools.ServiceTools;
 import tools.UserTools;
 
@@ -199,6 +200,20 @@ public class User {
 		JSONObject js = new JSONObject();
 		try {
 			js.put("Key", UserTools.getKey(login));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return js;
+	}
+	
+	public static JSONObject statUser(){
+		JSONObject js = new JSONObject();
+		int nbCo = BDTools.nbUserCo();
+		int nbUserTotal = BDTools.nbUser();
+		try {
+			js.put("Utilisateurs connectés ", nbCo);
+			js.put("Nombre d'utilisateurs inscrits ", nbUserTotal);
+			js.put("Stat ", nbCo/nbUserTotal);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

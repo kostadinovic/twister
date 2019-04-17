@@ -43,8 +43,8 @@ public class test1 {
 		//String s = UserTools.getKey("neecak");
 		//System.out.println(s);
 		
-		JSONObject friend = Friend.addFriend("neecak",UserTools.getKey("neecak"),"neecak");
-		System.out.println(friend); 
+		//JSONObject friend = Friend.addFriend("neecak",UserTools.getKey("neecak"),"neecak");
+		//System.out.println(tools.BDTools.nbUser()); 
 		
 		
 		
